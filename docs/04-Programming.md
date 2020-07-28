@@ -1207,7 +1207,31 @@ public String delete(@PathVariable("id") Integer id){
 
 ![B144](../images/B144.png)
 
+```bash
+git init // 初始化仓库
+git add -A // 添加所有文件到暂存区
+git commit -m "初始版本" // 把暂存区的文件提交给Git仓库并添加注释（-m 后面是提交内容的描述）
+git remote add origin https://github.com/WoShiJack/Hello-World.git // 连接远程仓库
+git push -u origin master // 推送到远程Hello-World仓库
+```
+> 最后一条命令运行后，会提示输入 `GitHub` 的账号、密码。如果没有错误信息，证明已经成功推送到远程仓库中了。
 
+5. 刷新仓库页面，提交的代码已经显示。
 
+![B145](../images/B145.png)
+
+6. 切换到 `Settings` 页签，页面下方找到 `GitHub Pages`，然后选择 `master branch`。
+
+![B146](../images/B146.png)
+
+7. 页面自动刷新后，就可以看到部署的文档网站地址。
+
+![B147](../images/B147.png)
+
+8. 访问该地址，如果没有问题，会显示网站信息。如果出现 `404`，不用担心，浏览器有缓存，过一会会自己刷新，或者换个浏览器访问就可以了。
+
+![B148](../images/B148.png)
+
+![B149](../images/B149.png)
 
 
