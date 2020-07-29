@@ -68,16 +68,61 @@ flush privileges;
 
 > 返回测试连接即可。
 
-#### 4.1.1.3 &nbsp;&nbsp;设置时区 serverTimezone
+#### 4.1.1.3 &nbsp;&nbsp;The server time zone value '�й���׼ʱ��' is unrecognized or represents more than...
 
-> 驱动包版本：mysql-connector-java-8.0.19.jar
+1. 数据库版本。
+ 
+* `MySQL` 版本：8.0.19
+* `Maven` 依赖版本：8.0.21
 
-* 指定时区 `properties` 配置信息（如果不设置时区会相差13个小时）。
+2. 数据源配置。
 
-```properties
-jdbc:mysql://ip:port/xxx?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
-driverClassName=com.mysql.cj.jdbc.Driver
+```xml
+<!--配置数据源-->
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring-learn"></property>
+    <property name="user" value="root"></property>
+    <property name="password" value="1"></property>
+</bean>
 ```
+
+3. 程序调用与数据库交互的方法时，出现如下错误：
+
+```error
+Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the 'serverTimezone' configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+	at sun.reflect.GeneratedConstructorAccessor42.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:85)
+	at com.mysql.cj.util.TimeUtil.getCanonicalTimezone(TimeUtil.java:132)
+	at com.mysql.cj.protocol.a.NativeProtocol.configureTimezone(NativeProtocol.java:2120)
+	at com.mysql.cj.protocol.a.NativeProtocol.initServerSession(NativeProtocol.java:2143)
+	at com.mysql.cj.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:1310)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:967)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:826)
+	... 11 more
+```
+
+> 通过错误信息可知，需要配置 `serverTimezone` 的属性。
+
+修改后的 `XML` 如下：
+
+```xml
+<!--配置数据源-->
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring-learn?serverTimezone=Asia/Shanghai"></property>
+    <property name="user" value="root"></property>
+    <property name="password" value="1"></property>
+</bean>
+```
+
+通过上面的修改，程序运行正常。不过还有一点需要注意的是，`MySQL 8.0` 版本和以前的版本驱动类名不一样，区别如下：
+
+!> MySQL 8.0：com.mysql.cj.jdbc.Driver  
+   MySQL 5.7：com.mysql.jdbc.Driver
 
 #### 4.1.1.4 &nbsp;&nbsp;1251-Client does not support...
 
@@ -272,6 +317,18 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密�
 ```
 
 如果返回 `Query OK, 0 rows affected`，则表示密码重置成功。
+
+#### 4.1.1.7 &nbsp;&nbsp;1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server...
+
+* 问题如下图所示，`primary key(id),` 这里多了一个逗号，去掉后运行成功。
+
+![B150](../images/B150.png)
+
+#### 4.1.1.7 &nbsp;&nbsp;A ResourcePool could not acquire a resource from its primary factory or source
+
+> 由于粗心，错把数据库名当作表名放到 `SQL` 语句中。
+
+![B151](../images/B151.png)
 
 ### 4.1.2 &nbsp;&nbsp;Oracle
 

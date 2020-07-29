@@ -12,3 +12,6 @@
   * [办公](docs/05-Office.md)
   * [多媒体处理工具](docs/06-Media-processing-tools.md)
   * [系统辅助](docs/07-System-assist.md)
+
+* 其他
+  * [杂图欣赏](docs/20-Other.md)
