@@ -1,6 +1,6 @@
-## 7.1 &nbsp;&nbsp;Oracle VM VirtualBox
+## 7.1 Oracle VM VirtualBox
 
-### 7.1.1 &nbsp;&nbsp;扩展虚拟硬盘容量
+### 7.1.1 扩展虚拟硬盘容量
 
 > `Oracle VM VirtualBox` 管理器没有提供可视化的方式修改硬盘容量，所以只能通过命令行的方式进行修改。
 
@@ -31,7 +31,7 @@ PS C:\Program Files\Oracle\VirtualBox> .\VBoxManage modifyhd "G:\VirtualBox VMs\
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 ```
 
-### 7.1.2 &nbsp;&nbsp;虚拟机无法启动
+### 7.1.2 虚拟机无法启动
 
 > 最近装了 `Windos 10 Linux 子系统`，导致和 `Oracle VM VirtualBox` 不兼容，所以禁用 `Hyper-V` 就可以正常运行虚拟机了。
 
@@ -44,7 +44,7 @@ PS C:\WINDOWS\system32> bcdedit /set hypervisorlaunchtype off
 
 > 如果运行虚拟机没有还是不能正常启动，请重启电脑。
 
-### 7.1.3 &nbsp;&nbsp;安装 macOS Big Sur 11.0 Beta
+### 7.1.3 安装 macOS Big Sur 11.0 Beta
 
 > 之前一直用的 `VMware WorkStation`，听说 `Oracle VM VirtualBox` 比较轻。最近苹果的新系统出来了，在虚拟机安装体验一下。
 

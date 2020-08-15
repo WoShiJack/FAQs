@@ -8,10 +8,15 @@
   * [MacOS](docs/03-Mac-OS.md)
 
 * 软件
-  * [编程](docs/04-Programming.md)
+  * 编程
+    * [数据库](docs/04-PS01-Database.md)
+    * [框架](docs/04-PS02-Framework.md)
+    * [服务器端相关](docs/04-PS03-Server-side-correlation.md)
+    * [其他](docs/04-Programming.md)
   * [办公](docs/05-Office.md)
   * [多媒体处理工具](docs/06-Media-processing-tools.md)
   * [系统辅助](docs/07-System-assist.md)
 
 * 其他
-  * [杂图欣赏](docs/20-Other.md)
+  * [日记](docs/20-Diary.md)
+  * [遗愿清单](docs/21-Bucket-List.md)
