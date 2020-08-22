@@ -5,7 +5,7 @@
 * 系统
   * [Windows](docs/01-Windows.md)
   * [Linux](docs/02-Linux.md)
-  * [MacOS](docs/03-Mac-OS.md)
+  * [MacOS](docs/03-MacOS.md)
 
 * 软件
   * 编程
@@ -18,5 +18,6 @@
   * [系统辅助](docs/07-System-assist.md)
 
 * 其他
+  * [问题](docs/100-Questions.md)
   * [日记](docs/20-Diary.md)
   * [遗愿清单](docs/21-Bucket-List.md)

@@ -145,6 +145,32 @@
 
 > 编辑器中输入 `iter` 后，然后 `Tab`，也可以实现 `foreach` 的代码补全。
 
+#### 4.2.2.6 删除自定义的 archetype
+
+> 因为测试添加的 `archetype`，用不到了，所以想把它删除掉，但是 `IDEA` 中没有删除的地方，通过 [CSDN](https://blog.csdn.net/u012843189/article/details/83180007) 这篇博客了解到，可以从 `XML` 文件中将它清理掉。
+
+解决方案：
+
+1. 首先定位到 `XML` 文件位置： C:\Users\89349\AppData\Local\JetBrains\IntelliJIdea2020.1\Maven\Indices\UserArchetypes.xml
+
+2. 如果有很多自定以的 `archetype`，可以将不需要的移除掉。
+
+![B176](../images/B176.png)
+
+3. 移除掉后，重启 `IDEA` 后的效果。
+
+![B177](../images/B177.png)
+
+#### 4.2.2.7 IDEA 终端不能运行 Maven 命令
+
+> 在 [博客园](https://www.cnblogs.com/wswyy/p/13084955.html) 这篇博客找到了答案。
+
+解决方案：
+
+* `IDEA` 安装目录下，将主程序设置为以管理员身份运行，如下图：
+
+![B181](../images/B181.png)
+
 ## 4.3 RabbitMQ
 
 ### 4.3.1 Docker下安装了RabbitMQ,无法访问web管理页面
@@ -291,6 +317,13 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
  * 不断行的空白格 `&nbsp;` 或 `&#160;`
 
 > 缩进推荐使用 `&emsp;`。
+
+#### 4.9.1.2 换行
+
+序号|方法|说明
+:---:|:---:|:---:
+1|空格键|两个空格键 + 回车键
+2|`<br/>`|换行符和 HTML 中的语法一样  
 
 ## 4.10 文档网站生成器
 
@@ -473,7 +506,7 @@ Process finished with exit code 0
 
 ![B169](../images/B169.png)
 
-### 4.13.3  xxx.DoesNotExist: xxx matching query does not exist
+### 4.13.4  xxx.DoesNotExist: xxx matching query does not exist
 
 > `Django` 的 `get` 方法是从数据库的取得一个匹配的结果，返回一个对象，如果记录不存在的话，它会报错。
 
@@ -498,7 +531,7 @@ Traceback (most recent call last):
 AppDemo.models.StudentsModel.DoesNotExist: StudentsModel matching query does not exist.
 ```
 
-### 4.13.4 'Meta.fields' must not contain non-model field names：xxx
+### 4.13.5 'Meta.fields' must not contain non-model field names：xxx
 
 ![B173](../images/B173.png)
 
@@ -519,10 +552,10 @@ class StudentsViewSet(ModelViewSet):
     filter_fields = ['s_age']
 ```
 
-### 4.13.5 关键字参数
+### 4.13.6 关键字参数
 
 > 初步了解 `Python` 时，发现函数的参数是 `**keywords`，有些不解，看过 [Python官网关于参数的文档](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) 后，原来这是这门语言关于特殊参数的定义，详细请看链接中的 `4.7.3.特殊参数 ~ 4.7.3.5.回顾`。
 
-### 4.13.6 PyCharm 没有智能提示
+### 4.13.7 PyCharm 没有智能提示
 
 > 因为 `Python` 是运行时才会识别类型，所以没有初始化的对象是没有提示的。可以在 `PyCharm` 的 `Python Console` 中运行代码，查看右侧对象初始化的状态。

@@ -70,10 +70,10 @@ flush privileges;
 
 #### 4.1.1.3 The server time zone value '�й���׼ʱ��' is unrecognized or represents more than...
 
-1. 数据库版本。
+1. 环境说明。
  
-* `MySQL` 版本：8.0.19
-* `Maven` 依赖版本：8.0.21
+`MySQL` 版本：8.0.19<br/>
+`Maven` 依赖版本：8.0.21
 
 2. 数据源配置。
 
@@ -121,16 +121,15 @@ Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The serv
 
 通过上面的修改，程序运行正常。不过还有一点需要注意的是，`MySQL 8.0` 版本和以前的版本驱动类名不一样，区别如下：
 
-!> MySQL 8.0：com.mysql.cj.jdbc.Driver  
+!> MySQL 8.0：com.mysql.cj.jdbc.Driver<br/>
    MySQL 5.7：com.mysql.jdbc.Driver
 
 #### 4.1.1.4 1251-Client does not support...
 
 环境说明：
 
-管理工具：`Navicat for MySQL 10.1.7`。
-
-数据库版本：`MySQL 8.0.2`。
+管理工具：`Navicat for MySQL 10.1.7`。<br/>
+数据库：`MySQL 8.0.2`。
 
 错误如下：
 
@@ -320,9 +319,11 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密�
 
 #### 4.1.1.7 1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server...
 
-* 问题如下图所示，`primary key(id),` 这里多了一个逗号，去掉后运行成功。
+问题如下图所示:
 
 ![B150](../images/B150.png)
+
+原因：`primary key(id),` 这里多了一个逗号，去掉后运行成功。
 
 ### 4.1.2 PostgreSQL
 

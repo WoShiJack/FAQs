@@ -42,7 +42,7 @@ PS C:\WINDOWS\system32> bcdedit /set hypervisorlaunchtype off
 操作成功完成。
 ```
 
-> 如果运行虚拟机没有还是不能正常启动，请重启电脑。
+> 如果运行虚拟机还是不能正常启动，请重启电脑。
 
 ### 7.1.3 安装 macOS Big Sur 11.0 Beta
 

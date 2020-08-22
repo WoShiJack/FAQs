@@ -157,35 +157,9 @@ public void addInterceptors(InterceptorRegistry registry) {
 }
 ```
 
-### 4.8.3 server.servlet.context-path在指定配置文件上不起作用
 
-!> `Spring Boot 2.x` 开始，`server.context-path` 改成 `server.servlet.context-path` 了。
 
-resources下的配置文件：
-
-![B127](../images/B127.png)
-
-D盘下的配置文件：
-
-![B128](../images/B128.png)
-
-当执行如下命令时，访问路径的互补配置没有生效（暂时不清楚读取不到路径的原因，后续有机会研究研究）。
-
-```powershell
-java -jar fileload-0.0.1-SNAPSHOT.jar --spring.config.location=D:/application.properties
-```
-
-![B129](../images/B129.png)
-
-当指定端口的配置文件和访问路径，达到预期效果。
-
-```powershell
-java -jar fileload-0.0.1-SNAPSHOT.jar --spring.config.location=D:/application.properties --server.servlet.context-path=/jack02
-```
-
-![B130](../images/B130.png)
-
-### 4.8.4 Spring Boot 2.x 与1.x版本的嵌入式Servlet容器区别
+### 4.8.3 Spring Boot 2.x 与1.x版本的嵌入式Servlet容器区别
 
 ```java
 //在SpringBoot 1.x 中配置嵌入式的Servlet容器
@@ -217,7 +191,7 @@ public WebServerFactoryCustomizer webServerFactoryCustomizer(){
 
 同时， `WebServerFactoryCustomizer` 需使用 `ConfigurableWebServerFactory` 对象实现对 `customize()` 方法的转换才能实现配置。
 
-### 4.8.5 Spring Boot+JPA 项目启动失败，无法扫描到Repository
+### 4.8.4 Spring Boot+JPA 项目启动失败，无法扫描到Repository
 
 根据以下错误，搜了好多都是添加各种注解。
 
@@ -264,7 +238,7 @@ spring:
 ```
 
 
-### 4.8.6 Spring Boot Configuration Annotation Processor not configured
+### 4.8.5 Spring Boot Configuration Annotation Processor not configured
 
 问题：虽然提示了如下错误，但是不影响最终运行效果。
 
@@ -280,12 +254,12 @@ spring:
 
 ![B126](../images/B126.png)
 
-### 4.8.7 Spring Boot应用启动时，不能加载执行resources文件下的SQL文件
+### 4.8.6 Spring Boot应用启动时，不能加载执行resources文件下的SQL文件
 
 在 `Spring Boot 2.0` 版本之前，如果把 `SQL` 文件直接放在 `resources` 文件夹下是可以直接被加载执行，完成数据库的创建和数据的插入,但是要符合相应的规则：
 
-!> 1. 建表语句要命名为，`schema.sql` 或者 `schema-all.sql`。
-!> 2. 数插入语句要命名为：`data.sql` 或者 `data-all.sql`。
+!> 1. 建表语句要命名为，`schema.sql` 或者 `schema-all.sql`。<br/>
+2. 数插入语句要命名为：`data.sql` 或者 `data-all.sql`。
 
 如果你想使用其他命名的 `SQL` 文件，你可以在 `application.yml` 或者是 `application.properties` 文件中指定：
 
@@ -305,7 +279,7 @@ initialization-mode: always
 这样就可以加载你的目标 `SQL` 文件了。
 
 
-### 4.8.8 拦截器排除css，js，svg等静态资源
+### 4.8.7 拦截器排除css，js，svg等静态资源
 
 未排除静态资源的拦截器代码：
 
@@ -331,7 +305,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 ![B123](../images/B123.png)
 
-### 4.8.9 删除表单报错：Request method 'POST' not supported
+### 4.8.8 删除表单报错：Request method 'POST' not supported
 
 ![B121](../images/B121.png)
 
@@ -472,8 +446,9 @@ public class TransactionManager {
 
 ### 4.11.3 MySQL低版本驱动连接高版本数据库错误
 
-> 版本信息如下：  
-`MySQL` 驱动：5.1.6  
+环境说明：
+
+`MySQL` 驱动：5.1.6<br/>
 `MySQL` 数据库：8.0.19
 
 ```error
