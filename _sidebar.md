@@ -18,6 +18,8 @@
   * [系统辅助](docs/07-System-assist.md)
 
 * 其他
-  * [问题](docs/100-Questions.md)
-  * [日记](docs/20-Diary.md)
-  * [遗愿清单](docs/21-Bucket-List.md)
+  * [日记](docs/50-Diary.md)
+  * [问题](docs/51-Questions.md)
+  * [书籍](docs/52-Books.md)
+  * [代办事项](docs/53-To-Do-List.md)
+  * [遗愿清单](docs/54-Bucket-List.md)

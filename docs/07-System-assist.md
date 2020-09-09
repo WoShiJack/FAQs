@@ -193,3 +193,31 @@ PS C:\Program Files\Oracle\VirtualBox> .\VBoxManage setextradata "Mac OS" VBoxIn
 ![B55](../images/B55.png ':size=960*540')
 
 > 苹果虚拟机使用欠佳，有能力上黑苹果，有 `money` 上白苹果。
+
+### 7.1.4 虚拟系统克隆
+
+1. 首先进入 `VirtualBox` 的安装路径，打开 `powershell`，输入 `.\VBoxManage clonehd`，查看克隆命令相关参数。
+
+```powershell
+PS C:\Program Files\Oracle\VirtualBox> .\VBoxManage clonehd
+VBoxManage clonemedium      [disk|dvd|floppy] <uuid|inputfile> <uuid|outputfile>
+                            [--format VDI|VMDK|VHD|RAW|<other>]
+                            [--variant Standard,Fixed,Split2G,Stream,ESX]
+                            [--existing]
+```
+
+> 本次操作以文件参数为例，其他参数不做叙述。
+
+2. 输入 `.\VBoxManage clonehd 源虚拟系统文件地址 目标虚拟系统文件地址`，执行命令中加双引号是因为目录有空格，不加执行报错。执行完成后会返回一个 `UUID`，这是一个虚拟系统的唯一标志。
+
+```powershell
+PS C:\Program Files\Oracle\VirtualBox> .\VBoxManage clonehd "G:\VirtualBox VMs\CentOS 7.8\CentOS 7.8-disk001.vdi" "G:\VirtualBox VMs\CentOS 7.8-Mirrors-Test\CentOS 7.8-Mirrors-Test-disk001.vdi"
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Clone medium created in format 'VDI'. UUID: 636f8e4b-2a04-4940-a301-5030930c4832
+```
+
+3. `Oracle VM VirtualBox` 软件中点击 `新建`，然后输入虚拟系统名称，选择系统类型、版本，接着选择克隆命令生成的虚拟系统文件，点击 `创建`，结束。
+
+![B211](../images/B211.png)
+
+!> 不要提前在目标目录下创建好和虚拟系统名称一致的同名文件夹，否则会提示文件夹已存在，不让创建虚拟机。

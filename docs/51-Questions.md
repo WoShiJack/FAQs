@@ -1,4 +1,4 @@
-## 2020-6-20
+## 2020-06-20
 
 问题：server.servlet.context-path在指定配置文件上不起作用。
 
@@ -107,9 +107,9 @@ root@192.168.1.10:/etc/yum.repos.d# yum repolist all
 
 问题：在慕课网学习 [Nginx](http://www.imooc.com/wiki/nginxlesson/httpmodule01.html) 时，`realip` 模块示例输出的结果和教程不一致。
 
-1. 慕课网 `Nginx realip 模块` 示例：
+1. 慕课网 `Nginx realip` 模块示例：
 
-![X1](../images/X1.png)
+![X1](../images/B227.png)
 
 2. `nginx.conf` 完整配置信息如下：
 
@@ -154,7 +154,7 @@ http {
 
 3. 内网虚拟机 `CentOS 7.8` 已经通过 `花生壳` 域名映射 80 端口。
 
-![X2](../images/X2.png)
+![X2](../images/B228.png)
 
 4. `real_ip_recursive` 开启或者关闭，使用 `curl` 进行访问，始终返回的是真实的内网地址。
 
