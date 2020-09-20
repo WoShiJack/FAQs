@@ -14,6 +14,18 @@
 
 ![B88](../images/B88.png)
 
+#### 4.2.1.2 预览 Markdown 文档
+
+> 本文转载自 [php中文网](https://www.php.cn/tool/vscode/440259.html) 。
+
+1. 点击侧边栏第5个图标，然后在上方输入框内输入 `Markdown Shortcuts` 或者 `Markdown Theme Kit` ，紧接着右侧点击 `Install`，我这里已经是安装过的状态。
+
+![B249](../images/B249.png)
+
+2. 按下 `Ctrl + Shift + V` 快捷键，会在标签页打开一个预览标签，双击相应内容可以跳转回 `Markdown` 文档。
+
+![B250](../images/B250.png)
+
 ### 4.2.2 IntelliJ IDEA
 
 #### 4.2.2.1 启动Tomcat，控制台出现乱码
@@ -559,3 +571,61 @@ class StudentsViewSet(ModelViewSet):
 ### 4.13.7 PyCharm 没有智能提示
 
 > 因为 `Python` 是运行时才会识别类型，所以没有初始化的对象是没有提示的。可以在 `PyCharm` 的 `Python Console` 中运行代码，查看右侧对象初始化的状态。
+
+### 4.13.8 下载 B站、腾讯等网站上的视频（非 VIP 视频）
+
+> 本文转载自 [知乎](https://www.zhihu.com/question/310725414/answer/586853403) 、[CSDN](https://blog.csdn.net/Chanssl/article/details/83050959) 。
+
+1. 下载 [Python 3](https://www.python.org/downloads/) 最新版并安装。
+
+2. 下载 [FFmpeg](https://ffmpeg.zeranoe.com/builds/) 。
+
+![B232](../images/B232.png)
+
+解压后并配置环境变量：
+
+![B233](../images/B233.png)
+
+`cmd` 中输入 `ffmpeg` 并回车，显示如下信息，即为配置成功。
+
+![B234](../images/B234.png)
+
+[FFmpeg 的介绍与使用](https://blog.csdn.net/u011330638/article/details/82392268) 。
+
+3. 安装 `you-get` 。
+
+安装时出现如下错误：
+
+![B238](../images/B238.png)
+
+以下源任意指定一个：
+
+`阿里云` http://mirrors.aliyun.com/pypi/simple/<br/>
+`中国科技大学` https://pypi.mirrors.ustc.edu.cn/simple/<br/>
+`豆瓣` http://pypi.douban.com/simple/<br/>
+`清华大学` https://pypi.tuna.tsinghua.edu.cn/simple/<br/>
+`中国科学技术大学` http://pypi.mirrors.ustc.edu.cn/simple/
+
+```cmd
+pip3.8 install you-get -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+```
+
+![B235](../images/B235.png)
+
+4. 使用 `you-get -i 视频链接` 查询能下载到的格式种类。
+
+```cmd
+you-get -i https://www.bilibili.com/video/BV1SZ4y1K7wH
+```
+
+![B236](../images/B236.png)
+
+5. 如果 `步骤4` 中不包含 `format` 信息，则可直接使用使用 `you-get 视频链接` 下载视频，否则需要  `you-get --format=列表中的一种格式 视频链接` 进行下载。
+
+```cmd
+you-get --format=dash-flv https://www.bilibili.com/video/BV1SZ4y1K7wH
+```
+
+![B237](../images/B237.png)
+
+6. 视频下载后的路径 `C:\Users\用户名` 。

@@ -221,3 +221,27 @@ Clone medium created in format 'VDI'. UUID: 636f8e4b-2a04-4940-a301-5030930c4832
 ![B211](../images/B211.png)
 
 !> 不要提前在目标目录下创建好和虚拟系统名称一致的同名文件夹，否则会提示文件夹已存在，不让创建虚拟机。
+
+### 7.1.5 Could not mount the media/drive 'C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso' (VERR_PDM_MEDIA_LOCKED).
+
+> 参考 [简书](https://www.jianshu.com/p/da1bdc673f2e) 解决问题。
+
+`VirtualBox` 安装 `Deepin 20` 后，显示中没有 `1920*1080` 的分别率。
+
+![B229](../images/B229.png)
+
+安装增强工具提示错误。
+
+![B230](../images/B230.png)
+
+终端中输入如下命令，执行完成后，重启 `Deepin 20` 。
+
+```bash
+jack@jack-PC:~$ sudo mkdir --P /media/cdrom
+jack@jack-PC:~$ sudo mount -t auto /dev/cdrom /media/ cdrom/
+jack@jack-PC:~$ cd /media/cdrom
+jack@jack-PC:/media/cdrom$ sudo sh VBoxLinuxAdditions.run
+```
+![B231](../images/B231.png)
+
+> `VirtualBox` 菜单中选择全屏模式，可以在显示中看到 `1920*1080` 的分别率，退出后，不显示，但显示效果是 `1920*1080` 的分别率。

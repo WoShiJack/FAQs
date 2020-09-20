@@ -325,11 +325,111 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '新密�
 
 原因：`primary key(id),` 这里多了一个逗号，去掉后运行成功。
 
+#### 4.1.1.8 忘记 MySQL 数据库连接密码后重置
+
+> 本文部分内容转载自 [CSDN](https://blog.csdn.net/weidong_y/article/details/80493743) 。
+
+环境说明：`MySQL 5.1.55`
+
+1. 首先停止 `MySQL` 服务（使用管理员窗口运行）。
+
+```powershell
+PS D:\1-ProgramFiles\1-DevTools\wcpServer\mysql\bin> net stop wcpdb
+```
+
+![B242](../images/B242.png)
+
+2. 启动 `MySQL` 服务的时候跳过权限表认证（免密登录）。
+
+```powershell
+PS D:\1-ProgramFiles\1-DevTools\wcpServer\mysql\bin> .\mysqld --skip-grant-tables
+```
+
+运行后出现如下错误：
+
+![B239](../images/B239.png)
+
+> 参考 [新浪博客](http://blog.sina.com.cn/s/blog_5504485801011ju2.html) 修改 `my.ini` 中的 `skip-locking` 为 `skip-external-locking` 。
+
+```ini
+[mysqld]
+port		= 3399
+socket		= MySQL
+#skip-locking
+skip-external-locking
+key_buffer_size = 16M
+max_allowed_packet = 1M
+table_open_cache = 64
+sort_buffer_size = 512K
+net_buffer_length = 8K
+read_buffer_size = 256K
+read_rnd_buffer_size = 512K
+myisam_sort_buffer_size = 8M
+log-bin=mysql-bin
+binlog_format=mixed
+server-id	= 1
+character_set_server = utf8
+```
+
+3. 再次运行 `.\mysqld --skip-grant-tables` 。
+
+![B240](../images/B240.png)
+
+4. 重新打开一个管理员窗口，运行 `.\mysql` 。
+
+![B241](../images/B241.png)
+
+5. 连接权限数据库 `use mysql` 。
+
+![B243](../images/B243.png)
+
+6. 修改数据库连接密码。
+
+```powershell
+mysql> update user set password=password("1") where user="root";
+```
+
+![B244](../images/B244.png)
+
+7. 刷新权限。
+
+```powershell
+mysql> flush privileges;
+```
+
+![B245](../images/B245.png)
+
+8. 退出 `mysql` 。
+
+```powershell
+mysql> quit
+```
+
+![B246](../images/B246.png)
+
+9. 修改 `root` 密码后，需要执行下面的语句和新修改的密码。不然开启 `mysql` 时会出错。
+
+```powershell
+PS D:\1-ProgramFiles\1-DevTools\wcpServer\mysql\bin> ./mysqladmin -u root -p shutdown
+```
+
+![B247](../images/B247.png)
+
+10. 将 `my.ini` 中的 `skip-external-locking` 还原为 `skip-locking` 。
+
+11. 启动 `mysql` 服务。
+
+```powershell
+PS D:\1-ProgramFiles\1-DevTools\wcpServer\mysql\bin> net start wcpdb
+```
+
+![B248](../images/B248.png)
+
 ### 4.1.2 PostgreSQL
 
 #### 4.1.2.1 解压版安装
 
-> 本文部分转载自 [开源中国](https://my.oschina.net/ososchina/blog/860341)。
+> 本文部分内容转载自 [开源中国](https://my.oschina.net/ososchina/blog/860341) 。
 
 1. [PostgreSQL](https://www.enterprisedb.com/download-postgresql-binaries) 解压版官网下载。
 
@@ -547,3 +647,11 @@ it
 ##### 4.1.5.2.1 点击左上角工具栏菜单闪退
 
 解决方案：网易有道词典导致闪退的，关闭后使用 `Navicat`，一切正常。
+
+##### 4.1.5.2.2 Navicat Premium 15 无法备份数据库为 psc 格式
+
+> `Navicat` 新版本备份格式为 `nb3` 。
+
+解决方案：
+
+使用低版本的 `Navicat`，例如：`Navicat for mysql 10.1.7` 。
