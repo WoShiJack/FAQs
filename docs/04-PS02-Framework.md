@@ -107,7 +107,7 @@ public class DruidConfig {
 
 ![B131](../images/B131.png)
 
-登录页设置favicon.ico
+登录页设置 `favicon.ico`
 
 ```html
 <link type="image/x-icon" rel="shortcut icon" href="/asserts/img/favicon.ico" th:href="@{/asserts/img/favicon.ico}">
@@ -156,8 +156,6 @@ public void addInterceptors(InterceptorRegistry registry) {
     .excludePathPatterns("/index.html","/","/user/login","/**/*.css","/**/*.js","/**/*.svg","/**/*.ico");
 }
 ```
-
-
 
 ### 4.8.3 Spring Boot 2.x 与1.x版本的嵌入式Servlet容器区别
 
@@ -237,7 +235,6 @@ spring:
     show-sql: true
 ```
 
-
 ### 4.8.5 Spring Boot Configuration Annotation Processor not configured
 
 问题：虽然提示了如下错误，但是不影响最终运行效果。
@@ -277,7 +274,6 @@ initialization-mode: always
 ```
 
 这样就可以加载你的目标 `SQL` 文件了。
-
 
 ### 4.8.7 拦截器排除css，js，svg等静态资源
 
@@ -342,7 +338,6 @@ public String delete(@PathVariable("id") Integer id){
     });
 </script>
 ```
-
 
 ## 4.11 Spring
 
@@ -446,10 +441,7 @@ public class TransactionManager {
 
 ### 4.11.3 MySQL低版本驱动连接高版本数据库错误
 
-环境说明：
-
-`MySQL` 驱动：5.1.6<br/>
-`MySQL` 数据库：8.0.19
+报错信息如下：
 
 ```error
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [applicationContext.xml]: Error setting property values; nested exception is org.springframework.beans.PropertyBatchUpdateException; nested PropertyAccessExceptions (1) are:
@@ -466,23 +458,28 @@ PropertyAccessException 1: org.springframework.beans.MethodInvocationException: 
 	... 15 more
 ```
 
+环境说明：
+
+* MySQL 驱动：5.1.6
+* MySQL：8.0.19
+
 > `Maven` 配置文件中将驱动版本修改为 `MySQL 8` 版本即可。
 
 ### 4.11.4 新建项目后，右键菜单无法新建 XML
 
-* 首先添加 `Spring Framework` 依赖信息。
+1. 首先添加 `Spring Framework` 依赖信息。
 
-```xml
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-    <version>5.0.2.RELEASE</version>
-</dependency>
-```
+  ```xml
+  <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.0.2.RELEASE</version>
+  </dependency>
+  ```
 
-* 添加后就会显示 `Spring Config` 菜单项，这样就可以添加 `XML` 文件了。
+2. 添加后就会显示 `Spring Config` 菜单项，这样就可以添加 `XML` 文件了。
 
-![B152](../images/B152.png)
+  ![B152](../images/B152.png)
 
 ## 4.12 MyBatis
 
@@ -527,16 +524,16 @@ PropertyAccessException 1: org.springframework.beans.MethodInvocationException: 
 
 1. 首先 `Ctrl + Alt + S` → `File and Code Templates`，然后点击 `加号`，输入模板名称、后缀名以及模板内容，最后点击 `Apply`,`OK`。
 
-![B153](../images/B153.png)
+  ![B153](../images/B153.png)
 
 2. 点击 `新建`，选择我们创建的模板 `Config.xml`。
 
-![B154](../images/B154.png)
+  ![B154](../images/B154.png)
 
 3. 输入配置文件名、数据库连接信息，点击 `OK`。
 
-![B155](../images/B155.png)
+  ![B155](../images/B155.png)
 
 4. 这样一个配置文件就创建好了。
 
-![B156](../images/B156.png)
+  ![B156](../images/B156.png)

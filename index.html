@@ -9,8 +9,6 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"> -->
 </head>
 
 <body>
@@ -18,12 +16,16 @@
   <script>
     window.$docsify = {
       name: 'WoShiJack\'s FAQs',
-      repo: '',
+      repo: 'https://github.com/WoShiJack',
       maxLevel: 6, //最大支持渲染的标题层级
       subMaxLevel: 6,
       homepage: 'README.md',
       coverpage: true,
       loadSidebar: true, // 加载 _sidebar.md
+      loadNavbar: true, // 加载 _navbar.md
+      auto2top: true, // 切换页面后是否自动跳转到页面顶部
+      onlyCover: false, // 只在访问主页时加载封面
+      topMargin: 60, // 调整top
       search: {
         maxAge: 86400000, // 过期时间，单位毫秒，默认一天
         paths: 'auto',
@@ -47,11 +49,46 @@
         buttonText: '复制',
         errorText: 'Error',
         successText: 'OK!'
-      }
-
+      },
+      // 页脚处增加 最后更新时间
+      formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+      plugins: [
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/woshijack/FAQs/tree/master/' + vm.route.file
+            // var editHtml = '[📝 EDIT DOCUMENT](' + url + ')\n'
+            var editHtml = '[🖊 Edit Document](' + url + ')\n'
+            return html
+              + '\n----\n'
+              // + '> Last Updated {docsify-updated} '
+              + '> 最后更新于 {docsify-updated} '
+              + editHtml
+          })
+        }
+      ],
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <!-- 离线模式 -->
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
+  <!-- 回到顶部功能 -->
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.goup.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.goup({
+        trigger: 100,
+        bottomOffset: 52,
+        locationOffset: 25,
+        //title: 'TOP',
+        titleAsText: true
+      });
+    });
+  </script>
   <!-- 编写 Markdown 文档时，遇到时间中的冒号显示出现问题，开启 emoji 后，恢复正常 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
   <!-- 搜索插件 -->

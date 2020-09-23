@@ -4,30 +4,30 @@
 
 1. 修改文件路径 `/etc/docker/daemon.json`。
 
-> 通过 `SmarTTY` 智能终端进行修改，也可以用 `vim` 命令进行修改。
+  通过 `SmarTTY` 智能终端进行修改，也可以用 `vim` 命令进行修改。
 
 2. 添加国内镜像源以及 `DNS`。
 
-```text
-"registry-mirrors": [
-"https://kfwkfulq.mirror.aliyuncs.com",
-"https://2lqq34jg.mirror.aliyuncs.com",
-"https://pee6w651.mirror.aliyuncs.com",
-"https://registry.docker-cn.com",
-"http://hub-mirror.c.163.com"
-],
-"dns": ["8.8.8.8","8.8.4.4"]
-```
+  ```text
+  "registry-mirrors": [
+  "https://kfwkfulq.mirror.aliyuncs.com",
+  "https://2lqq34jg.mirror.aliyuncs.com",
+  "https://pee6w651.mirror.aliyuncs.com",
+  "https://registry.docker-cn.com",
+  "http://hub-mirror.c.163.com"
+  ],
+  "dns": ["8.8.8.8","8.8.4.4"]
+  ```
 
 3. 重启 `Docker` 服务。
 
-```docker
-systemctl restart docker
-```
+  ```docker
+  systemctl restart docker
+  ```
 
 ### 4.5.2 删除相同IMAGE ID镜像的方法
 
-> 本文转载自 [CSDN](https://blog.csdn.net/wcuuchina/article/details/86062142)
+> 本文转载自 [CSDN](https://blog.csdn.net/wcuuchina/article/details/86062142) 。
 
 当指定的版本和最新版本相同的时候，会有相同的 `IMAGE ID`。
 
@@ -61,83 +61,86 @@ docker rmi docker.io/mysql:8.0
 
 1. 启动容器。
 
-```bash
-root@192.168.1.10:~# docker run -d -p 8888:8080 tomcat:latest
-```
+  ```bash
+  root@192.168.1.10:~# docker run -d -p 8888:8080 tomcat:latest
+  ```
+  
+  参数说明：
 
-```txt
-参数说明：
--d 后台运行。
--p 映射端口。
-tomcat:latest 以冒号隔开指定版本，默认不写就是 `latest`。
-```
+  ```txt
+  【-d】：后台运行。
+  【-p】：映射端口。
+  【tomcat:latest】：以冒号隔开指定版本，默认不写就是 `latest`。
+  ```
 
 2. 查看运行中的容器。
 
-> 容器的【CONTAINER ID】`30d13830ee5a` 可以简写为 `30`，或者其他位数，估计只要保重唯一，应该都可以执行成功，具体没有深究。
+  容器的【CONTAINER ID】`30d13830ee5a` 可以简写为 `30`，或者其他位数，估计只要保重唯一，应该都可以执行成功，具体没有深究。
 
-```bash
-root@192.168.1.10:~# docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-30d13830ee5a        tomcat:latest       "catalina.sh run"   18 minutes ago      Up 18 minutes       0.0.0.0:8888->8080/tcp   hopeful_rosalind
-```
+  ```bash
+  root@192.168.1.10:~# docker ps
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+  30d13830ee5a        tomcat:latest       "catalina.sh run"   18 minutes ago      Up 18 minutes       0.0.0.0:8888->8080/tcp   hopeful_rosalind
+  ```
 
 3. 以交互方式进入容器。
 
-```bash
-root@192.168.1.10:~# docker exec -it 30d13830ee5a bash
-root@30d13830ee5a:/usr/local/tomcat#
-```
+  ```bash
+  root@192.168.1.10:~# docker exec -it 30d13830ee5a bash
+  root@30d13830ee5a:/usr/local/tomcat#
+  ```
 
-```txt
-参数说明：
-exec Run a command in a running container (在运行的容器中运行命令)。
-exec -i --interactive (相互作用的) Keep STDIN open even if not attached (即使没有连接，也要保持STDIN打开)。
-exec -t --tty Allocate a pseudo-TTY (分配一个 冒充的终端设备)。
-bash 打开容器内的一个终端进程。
-```
+  参数说明：
+
+  ```txt
+  【exec】：Run a command in a running container (在运行的容器中运行命令)。
+  【exec -i】： --interactive (相互作用的) Keep STDIN open even if not attached (即使没有连接，也要保持STDIN打开)。
+  【exec -t】： --tty Allocate a pseudo-TTY (分配一个 冒充的终端设备)。
+  【bash】：打开容器内的一个终端进程。
+  ```
 
 4. 修改 `Tomcat` 中的 `webapp` 文件夹为 `webapp2`。
 
-```bash
-root@30d13830ee5a:/usr/local/tomcat# mv webapps weapps2
-```
+  ```bash
+  root@30d13830ee5a:/usr/local/tomcat# mv webapps weapps2
+  ```
 
 5. 修改 `Tomcat` 中的 `webapp.dist` 文件夹为 `webapp`。
 
-```bash
-root@30d13830ee5a:/usr/local/tomcat# mv webapps.dist webapps
-```
+  ```bash
+  root@30d13830ee5a:/usr/local/tomcat# mv webapps.dist webapps
+  ```
 
-> 4、5两个步骤修改文件夹的原因是 `Tomcat` 资源文件应该在 `webapps` 下，拉取的镜像中的文件夹为 `webapps.dist`，所以此处做了修改。
+  > 4、5两个步骤修改文件夹的原因是 `Tomcat` 资源文件应该在 `webapps` 下，拉取的镜像中的文件夹为 `webapps.dist`，所以此处做了修改。
 
 6. 退出，回到根目录。
 
-```bash
-root@30d13830ee5a:/usr/local/tomcat# exit
-exit
-root@192.168.1.10:/#
-```
+  ```bash
+  root@30d13830ee5a:/usr/local/tomcat# exit
+  exit
+  root@192.168.1.10:/#
+  ```
 
 7. 将修改后的容器提交生成一个新镜像。
 
-```bash
-root@192.168.1.10:~# docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-30d13830ee5a        tomcat:latest       "catalina.sh run"   49 minutes ago      Up 49 minutes       0.0.0.0:8888->8080/tcp   hopeful_rosalind
-root@192.168.1.10:~# docker commit -m="update mv webapps.dist webapps" -a="jack" 30d13830ee5a mytomcat:latest
-sha256:427d4f3065ba2c2d4a0bbdf08e04d7dbdea747b8a06c886921b2b677b05e3097
-```
+  ```bash
+  root@192.168.1.10:~# docker ps
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+  30d13830ee5a        tomcat:latest       "catalina.sh run"   49 minutes ago      Up 49 minutes       0.0.0.0:8888->8080/tcp   hopeful_rosalind
+  root@192.168.1.10:~# docker commit -m="update mv webapps.dist webapps" -a="jack" 30d13830ee5a mytomcat:latest
+  sha256:427d4f3065ba2c2d4a0bbdf08e04d7dbdea747b8a06c886921b2b677b05e3097
+  ```
 
-```txt
-参数说明：
--m 提交时的说明文字。
--a 提交的镜像作者。
-```
+  参数说明：
+
+  ```txt
+  【-m】：提交时的说明文字。
+  【-a】：提交的镜像作者。
+  ```
 
 8. 访问 `Tomcat`。
 
-![B99](../images/B99.png)
+  ![B99](../images/B99.png)
 
 ## 4.6 Maven
 
@@ -255,7 +258,7 @@ sha256:427d4f3065ba2c2d4a0bbdf08e04d7dbdea747b8a06c886921b2b677b05e3097
 
 2. 放到 `Maven` 仓库根目录。
 
-示例：`D:\1-ProgramFiles\1-DevTools\apache-maven-3.6.3\repository\archetype-catalog.xml`。
+  示例：`D:\1-ProgramFiles\1-DevTools\apache-maven-3.6.3\repository\archetype-catalog.xml`。
 
 解决方案一：
 
@@ -263,20 +266,19 @@ sha256:427d4f3065ba2c2d4a0bbdf08e04d7dbdea747b8a06c886921b2b677b05e3097
 
 ![B179](../images/B179.png)
 
-
 解决方案二：
 
 1. 依次找到 `File` → `New Projects Settings` → `Settings for New Projects...` → `Build,Execution,Deployment` → `Build Tools` → `Maven` → `Runner`。
 
 2. 设置 `VM Options` 为 `-DarchetypeCatalog=local`。
 
-![B180](../images/B180.png)
+  ![B180](../images/B180.png)
 
 ### 4.6.4 局部指定项目 JDK
 
 > 以下提供两种方式局部指定项目 `JDK`，全局指定请查看 [4.6.1 配置远程公共仓库、私服](docs/04-PS03-Server-side-correlation.md#_461-配置远程公共仓库、私服) 。
 
-方式一
+方式一：
 
 ```xml
 <properties>
@@ -285,7 +287,7 @@ sha256:427d4f3065ba2c2d4a0bbdf08e04d7dbdea747b8a06c886921b2b677b05e3097
 </properties>
 ```
 
-方式二
+方式二：
 
 ```xml
 <build>
@@ -357,31 +359,41 @@ and the repository exists.
 
 1. 在 `Git` 客户端输入如下命令：
 
-```git
-$ ssh-keygen -t rsa -C "xxxxx@xxxxx.com" # 双引号内为你的邮箱地址
-```
+  ```git
+  $ ssh-keygen -t rsa -C "xxxxx@xxxxx.com" # 双引号内为你的邮箱地址
+  ```
 
 2. 查看你的 `public key`。
 
-```git
-$ cat ~/.ssh/id_rsa.pub
-```
+  ```git
+  $ cat ~/.ssh/id_rsa.pub
+  ```
 
 3. 在码云 [SSH公钥](http://gitee.com/keys) 中添加你的 `public key`。
 
-![B183](../images/B183.png)
+  ![B183](../images/B183.png)
 
 4. 添加后，在 `Git` 中输入如下命令:
 
-```git
-$ ssh -T git@gitee.com
-```
+  ```git
+  $ ssh -T git@gitee.com
+  ```
 
-如果提示以下信息，证明 `public key` 添加成功。
+  如果提示以下信息，证明 `public key` 添加成功。
 
-```git
-Hi yourname! You've successfully authenticated, but GITEE.COM does not provide shell access.
-```
+  ```git
+  Hi yourname! You've successfully authenticated, but GITEE.COM does not provide shell access.
+  ```
+
+### 4.7.2 Git 客户端提交项目到 GitHub 远程仓库提示用户名或密码错误
+
+错误提示如下：
+
+![B251](../images/B251.png)
+
+这里的提示，有点误导，输入的应该是登录的邮箱而不应该是账户名，修改后，提交成功。
+
+![B252](../images/B252.png)
 
 ## 4.8 Nginx
 
@@ -422,15 +434,15 @@ root@192.168.1.10:~# yum -y install gcc gcc-c++ autoconf automake make
 
 1. 首先进入 `nginx` 安装目录。
 
-```bash
-root@192.168.1.10:~/nginx/sbin# cd /root/nginx/conf/
-```
+  ```bash
+  root@192.168.1.10:~/nginx/sbin# cd /root/nginx/conf/
+  ```
 
 2. 然后通过 `Smartty` 客户端工具，双击文件进行编辑，修改端口为不被占用的端口即可。
 
-![B187](../images/B187.png)
+  ![B187](../images/B187.png)
 
-![B188](../images/B188.png)
+  ![B188](../images/B188.png)
 
 ### 4.8.4 访问 403 错误
 
@@ -442,11 +454,11 @@ root@192.168.1.10:~/nginx/sbin# cd /root/nginx/conf/
 
 1. 在配置文件中添加 `user root;`。
 
-![B190](../images/B190.png)
+  ![B190](../images/B190.png)
 
 2. 重新启动 `nginx` 服务并访问，成功来到了 `nginx` 欢迎页。
 
-![B191](../images/B191.png)
+  ![B191](../images/B191.png)
 
 ### 4.8.5 include 指令
 
@@ -572,9 +584,10 @@ C:\Users\89349>telnet 192.168.1.6 90
 
 ![B202](../images/B202.png)
 
-环境说明：<br/>
-系统：`CentOS 7.8`<br/>
-Nginx：`1.18.0`
+环境说明：
+
+* 系统：CentOS 7.8
+* Nginx：1.18.0
 
 执行的命令：
 
@@ -728,78 +741,76 @@ root@192.168.1.6:~/nginx/sbin# ll ../logs/access.log
 
 > 本文转载自 [慕课网](https://www.imooc.com/article/284566)，部分内容略有调整。
 
-环境说明
+环境说明：
 
-```txt
-系统 CentOS 7.8
-Nginx 源码路径 /root/nginx-1.18.0/src
-Nginx 编译路径 /root/nginx-1.18.0/
-Nginx 安装路径 /root/nginx/
-```
+* 系统：`CentOS 7.8`
+* Nginx 源码路径：`/root/nginx-1.18.0/src`
+* Nginx 编译路径：`/root/nginx-1.18.0/`
+* Nginx 安装路径：`/root/nginx/`
 
 1. 首先查询 `nginx` 编译了哪些模块。
 
-> `./nginx -v` 是查询版本信息；`./nginx -V` 是查询详细信息。
+  > `./nginx -v` 是查询版本信息；`./nginx -V` 是查询详细信息。
 
-```bash
-root@192.168.1.6:~/nginx/sbin# ./nginx -V
-nginx version: nginx/1.18.0
-built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) 
-built with OpenSSL 1.0.2k-fips  26 Jan 2017
-TLS SNI support enabled
-configure arguments: --prefix=/root/nginx --with-http_ssl_module --with-http_stub_status_module --with-http_gzip_static_module --with-stream --with-http_realip_module --with-http_flv_module --with-http_random_index_module --with-mail --with-pcre --with-http_realip_module
-```
+  ```bash
+  root@192.168.1.6:~/nginx/sbin# ./nginx -V
+  nginx version: nginx/1.18.0
+  built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) 
+  built with OpenSSL 1.0.2k-fips  26 Jan 2017
+  TLS SNI support enabled
+  configure arguments: --prefix=/root/nginx --with-http_ssl_module --with-http_stub_status_module --with-http_gzip_static_module --with-stream --with-http_realip_module   --with-http_flv_module --with-http_random_index_module --with-mail --with-pcre --with-http_realip_module
+  ```
 
 2. 停止正在运行的 `nginx` 并备份安装路径下的 `nginx` 。
 
-```bash
-root@192.168.1.6:~/nginx/sbin# ./nginx -s stop
-root@192.168.1.6:~/nginx/sbin# cp nginx nginx.bak
-```
+  ```bash
+  root@192.168.1.6:~/nginx/sbin# ./nginx -s stop
+  root@192.168.1.6:~/nginx/sbin# cp nginx nginx.bak
+  ```
 
 3. 添加 `http_secure_link` 模块作为示例：
 
-```bash
-root@192.168.1.6:~/nginx/sbin# cd /root/nginx-1.18.0/
-root@192.168.1.6:~/nginx-1.18.0# ./configure  --prefix=/root/nginx            \--with-http_secure_link_module               \--with-http_ssl_module                             
- \--with-http_stub_status_module               \--with-http_gzip_static_module               \--with-stream                                \--with-http_realip_module           
-         \--with-http_flv_module                       \--with-http_random_index_module              \--with-mail                                  \--with-pcre
-```
+  ```bash
+  root@192.168.1.6:~/nginx/sbin# cd /root/nginx-1.18.0/
+  root@192.168.1.6:~/nginx-1.18.0# ./configure  --prefix=/root/nginx            \--with-http_secure_link_module               \--with-http_ssl_module                             
+   \--with-http_stub_status_module               \--with-http_gzip_static_module               \--with-stream                                \--with-http_realip_module           
+           \--with-http_flv_module                       \--with-http_random_index_module              \--with-mail                                  \--with-pcre
+  ```
 
-> `\` 表示两行之间没有换行，还有一点需要注意的是，结尾处不要有 `\`，否则会出现如下错误：
+  > `\` 表示两行之间没有换行，还有一点需要注意的是，结尾处不要有 `\`，否则会出现如下错误：
 
-```bash
-bash: -c: line 0: unexpected EOF while looking for matching `"'
-bash: -c: line 1: syntax error: unexpected end of file
-```
+  ```bash
+  bash: -c: line 0: unexpected EOF while looking for matching `"'
+  bash: -c: line 1: syntax error: unexpected end of file
+  ```
 
 4. 编译。
 
-> 第一次安装 `nginx` 的时候需要 `make && make install`，增加新模块只需要 `make` 。
+  > 第一次安装 `nginx` 的时候需要 `make && make install`，增加新模块只需要 `make` 。
 
-```bash
-root@192.168.1.6:~/nginx-1.18.0# make
-```
+  ```bash
+  root@192.168.1.6:~/nginx-1.18.0# make
+  ```
 
 5. 拷贝刚才编译的 `nginx` 到安装目录。
 
-```bash
-root@192.168.1.6:~/nginx-1.18.0# cp /objs/nginx /root/nginx/sbin/
-cp: overwrite ‘nginx’? y
-```
+  ```bash
+  root@192.168.1.6:~/nginx-1.18.0# cp /objs/nginx /root/nginx/sbin/
+  cp: overwrite ‘nginx’? y
+  ```
 
-5.启动 `nginx` 并查看 `nginx` 的编译模块。
+6. 启动 `nginx` 并查看 `nginx` 的编译模块。
 
-```bash
-root@192.168.1.6:~/nginx-1.18.0# cd ../nginx/sbin/
-root@192.168.1.6:~/nginx/sbin# ./nginx
-root@192.168.1.6:~/nginx/sbin# ./nginx -V
-nginx version: nginx/1.18.0
-built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) 
-built with OpenSSL 1.0.2k-fips  26 Jan 2017
-TLS SNI support enabled
-configure arguments: --prefix=/root/nginx --with-http_secure_link_module --with-http_ssl_module --with-http_stub_status_module --with-http_gzip_static_module --with-stream --with-http_realip_module --with-http_flv_module --with-http_random_index_module --with-mail --with-pcre
-```
+  ```bash
+  root@192.168.1.6:~/nginx-1.18.0# cd ../nginx/sbin/
+  root@192.168.1.6:~/nginx/sbin# ./nginx
+  root@192.168.1.6:~/nginx/sbin# ./nginx -V
+  nginx version: nginx/1.18.0
+  built by gcc 4.8.5 20150623 (Red Hat 4.8.5-39) (GCC) 
+  built with OpenSSL 1.0.2k-fips  26 Jan 2017
+  TLS SNI support enabled
+  configure arguments: --prefix=/root/nginx --with-http_secure_link_module --with-http_ssl_module --with-http_stub_status_module --with-http_gzip_static_module --with-stream   --with-http_realip_module --with-http_flv_module --with-http_random_index_module --with-mail --with-pcre
+  ```
 
 有一些模块是需要去下载安装包的，但是总体的思路是一样的。比如我需要安装 `echo-nginx-module` 这个模块。
 
@@ -933,8 +944,6 @@ http://192.168.1.6:8094/B210.png?md5=FSs6IIZT94ePfFf2hImTIA&expires=1598572924
 
 ![B215](../images/B215.png)
 
-
-
 ### 4.8.13 部署 Python 项目
 
 > 本文转载自 [慕课网](http://www.imooc.com/wiki/nginxlesson/nginxpython.html) ，部分内容略有调整。
@@ -943,276 +952,276 @@ http://192.168.1.6:8094/B210.png?md5=FSs6IIZT94ePfFf2hImTIA&expires=1598572924
 
 1. 安装虚拟环境 `pyenv` 。
 
-首先要知道，使用虚拟环境逐渐成了 `Python` 项目开发中的一种主流方式。 `pyenv` 可以帮我们生成多个 `Python` 的虚拟环境，这样我可以在同一台机器上使用 `python2` 或者 `python3` 或者 `python3` 的不同版本，避免不同项目因为依赖模块版本问题发生冲突。只要使用时，切换到那个具体的版本环境即可。下面来看在 `CentOS` 上如何安装并使用 `pyenv` :
+  首先要知道，使用虚拟环境逐渐成了 `Python` 项目开发中的一种主流方式。 `pyenv` 可以帮我们生成多个 `Python` 的虚拟环境，这样我可以在同一台机器上使用 `python2` 或者 `python3` 或者 `python3` 的不同版本，避免不同项目因为依赖模块版本问题发生冲突。只要使用时，切换到那个具体的版本环境即可。下面来看在 `CentOS` 上如何安装并使用 `pyenv` :
 
-```bash
-# 安装 git
-root@192.168.1.8:~# yum install git
-root@192.168.1.8:~# git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-```
+  ```bash
+  # 安装 git
+  root@192.168.1.8:~# yum install git
+  root@192.168.1.8:~# git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+  ```
 
-在 `/root/.bashrc` 文件最后加上如下 `2` 行。
+  在 `/root/.bashrc` 文件最后加上如下 `2` 行。
 
-```bashrc
-PATH="~/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-```
+  ```bashrc
+  PATH="~/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  ```
 
-```bash
-# 使配置生效
-root@192.168.1.8:~# source ~/.bashrc
-# 安装 pyenv-virtualenv
-root@192.168.1.8:~# git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
-```
+  ```bash
+  # 使配置生效
+  root@192.168.1.8:~# source ~/.bashrc
+  # 安装 pyenv-virtualenv
+  root@192.168.1.8:~# git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+  ```
 
-在 `/root/.bashrc` 文件最后加上如下 `1` 行。
+  在 `/root/.bashrc` 文件最后加上如下 `1` 行。
 
-```bashrc
-eval "$(pyenv virtualenv-init -)"
-```
+  ```bashrc
+  eval "$(pyenv virtualenv-init -)"
+  ```
 
-```bash
-# 使配置生效
-root@192.168.1.8:~# source ~/.bashrc
-# 查看 pyenv 的版本
-root@192.168.1.8:~# pyenv --version
-# 查看 pyenv 已经托管的 python 版本
-root@192.168.1.8:~# pyenv versions
-```
+  ```bash
+  # 使配置生效
+  root@192.168.1.8:~# source ~/.bashrc
+  # 查看 pyenv 的版本
+  root@192.168.1.8:~# pyenv --version
+  # 查看 pyenv 已经托管的 python 版本
+  root@192.168.1.8:~# pyenv versions
+  ```
 
-安装 `python 3.8.1`，同时建立一个以该版本为基础的虚拟环境：
+2. 安装 `python 3.8.1`，同时建立一个以该版本为基础的虚拟环境：
 
-> 因为 `python 3.8.1` 下载过慢，使用 `wget` 从国内源下载后安装。
+  > 因为 `python 3.8.1` 下载过慢，使用 `wget` 从国内源下载后安装。
 
-```bash
-# 安装 python 3.8.1 版本
-root@192.168.1.8:~# wget https://npm.taobao.org/mirrors/python/3.8.1/Python-3.8.1.tar.xz
-# 在 .pyenv 下创建 cache 目录
-root@192.168.1.8:~# mkdir /.pyenv/cache
-# 将文件移动到 .pyenv/cache 目录下，或者提前在 .pyenv 下创建 cache 目录，通过 wget 参数 -p 指定下载路径
-root@192.168.1.8:~# mv Python-3.8.1.tar.xz .pyenv/cache
-root@192.168.1.8:~# pyenv install 3.8.1
-# 建立一个虚拟环境，python 版本选择 3.8.1
-root@192.168.1.8:~# pyenv virtualenv 3.8.1 env-3.8.1
-# 激活该虚拟环境，运行命令无法进入虚拟环境，尚不清楚原因
-#root@192.168.1.8:~# pyenv activate env-3.8.1
-# 目前通过全局指定 python 的版本来实现进入虚拟环境
-root@192.168.1.8:~# pyenv global 3.8.1
-root@192.168.1.8:~# pyenv versions
-  system
-* 3.8.1 (set by /root/.pyenv/version)
-  3.8.1/envs/env-3.8.1
-  env-3.8.1
-# 查看该环境下python版本，没配置环境变量需要通过以下方式访问
-#root@192.168.1.8:~# /root/.pyenv/versions/3.8.1/bin/python3.8
-# 查看 python 版本
-#root@192.168.1.8:~# python
-```
+  ```bash
+  # 安装 python 3.8.1 版本
+  root@192.168.1.8:~# wget https://npm.taobao.org/mirrors/python/3.8.1/Python-3.8.1.tar.xz
+  # 在 .pyenv 下创建 cache 目录
+  root@192.168.1.8:~# mkdir /.pyenv/cache
+  # 将文件移动到 .pyenv/cache 目录下，或者提前在 .pyenv 下创建 cache 目录，通过 wget 参数 -p 指定下载路径
+  root@192.168.1.8:~# mv Python-3.8.1.tar.xz .pyenv/cache
+  root@192.168.1.8:~# pyenv install 3.8.1
+  # 建立一个虚拟环境，python 版本选择 3.8.1
+  root@192.168.1.8:~# pyenv virtualenv 3.8.1 env-3.8.1
+  # 激活该虚拟环境，运行命令无法进入虚拟环境，尚不清楚原因
+  #root@192.168.1.8:~# pyenv activate env-3.8.1
+  # 目前通过全局指定 python 的版本来实现进入虚拟环境
+  root@192.168.1.8:~# pyenv global 3.8.1
+  root@192.168.1.8:~# pyenv versions
+    system
+  * 3.8.1 (set by /root/.pyenv/version)
+    3.8.1/envs/env-3.8.1
+    env-3.8.1
+  # 查看该环境下python版本，没配置环境变量需要通过以下方式访问
+  #root@192.168.1.8:~# /root/.pyenv/versions/3.8.1/bin/python3.8
+  # 查看 python 版本
+  #root@192.168.1.8:~# python
+  ```
 
-全局指定 `python` 版本后，再使用 `python` 就是 `3.8.1` 版本的了，`pip` 命令也是该虚拟环境下的命令。所有 `pip` 安装的模块都会被安装到该虚拟环境下，而不是主环境中。
+  全局指定 `python` 版本后，再使用 `python` 就是 `3.8.1` 版本的了，`pip` 命令也是该虚拟环境下的命令。所有 `pip` 安装的模块都会被安装到该虚拟环境下，而不是主环境中。
 
-接下来，我们通过 `django` 框架创建一个简单的 `web` 项目，操作系统是 `CentOS 7.8` 。
+3. 接下来，我们通过 `django` 框架创建一个简单的 `web` 项目，操作系统是 `CentOS 7.8` 。
 
-```bash
-# 进入虚拟环境，目前无效
-#root@192.168.1.8:~# pyenv activate env-3.8.1
-# 安装 django 2.2 版本
-root@192.168.1.8:~/.pyenv# pip install django==2.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 使用 django-admin 命令创建项目
-root@192.168.1.8:~# django-admin startproject test_nginx
-root@192.168.1.8:~# cd test_nginx
-# 创建第一个应用
-root@192.168.1.8:~/test_nginx# django-admin startapp first
-```
+  ```bash
+  # 进入虚拟环境，目前无效
+  #root@192.168.1.8:~# pyenv activate env-3.8.1
+  # 安装 django 2.2 版本
+  root@192.168.1.8:~/.pyenv# pip install django==2.2 -i https://pypi.tuna.tsinghua.edu.cn/simple
+  # 使用 django-admin 命令创建项目
+  root@192.168.1.8:~# django-admin startproject test_nginx
+  root@192.168.1.8:~# cd test_nginx
+  # 创建第一个应用
+  root@192.168.1.8:~/test_nginx# django-admin startapp first
+  ```
 
-创建 `django` 的 `web` 工程和第一个应用后，我们看到工程的结构目录如下：
+  创建 `django` 的 `web` 工程和第一个应用后，我们看到工程的结构目录如下：
 
-```bash
-root@192.168.1.8:~/test_nginx# tree .
-.
-├── first
-│   ├── admin.py
-│   ├── apps.py
-│   ├── __init__.py
-│   ├── migrations
-│   │   └── __init__.py
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
-├── manage.py
-└── test_nginx
-    ├── __init__.py
-    ├── settings.py
-    ├── urls.py
-    └── wsgi.py
+  ```bash
+  root@192.168.1.8:~/test_nginx# tree .
+  .
+  ├── first
+  │   ├── admin.py
+  │   ├── apps.py
+  │   ├── __init__.py
+  │   ├── migrations
+  │   │   └── __init__.py
+  │   ├── models.py
+  │   ├── tests.py
+  │   └── views.py
+  ├── manage.py
+  └── test_nginx
+      ├── __init__.py
+      ├── settings.py
+      ├── urls.py
+      └── wsgi.py
+  
+  3 directories, 12 files
+  ```
 
-3 directories, 12 files
-```
+4. 为了让工程顺利跑起来，我们需要调整下工程中数据库的配置，在 `test_nginx/settings.py` 中，找到 `DATABASES` 变量的赋值语句，并修改成数据库相关配置，改为使用 `mysql` 提供数据库服务，因此我们需要额外准备一台有 `mysql` 服务的机器。具体修改如下图所示：
 
-为了让工程顺利跑起来，我们需要调整下工程中数据库的配置，在 `test_nginx/settings.py` 中，找到 `DATABASES` 变量的赋值语句，并修改成数据库相关配置，改为使用 `mysql` 提供数据库服务，因此我们需要额外准备一台有 `mysql` 服务的机器。具体修改如下图所示：
+  ```python
+  DATABASES = {
+      #'default': {
+      #    'ENGINE': 'django.db.backends.sqlite3',
+      #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      #}
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': 'nginx-test',
+          'USER': 'root',
+          'PASSWORD': '1',
+          'HOST': '192.168.1.8',
+          'PORT': '3307',
+      }
+  }
+  ```
 
-```python
-DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nginx-test',
-        'USER': 'root',
-        'PASSWORD': '1',
-        'HOST': '192.168.1.8',
-        'PORT': '3307',
-    }
-}
-```
+5. 最后，我们可以使用命令行启动该 `django` 服务了。
 
-最后，我们可以使用命令行启动该 `django` 服务了。
+  ```bash
+  # 安装依赖
+  root@192.168.1.8:~/test_nginx# yum install mysql-devel
+  root@192.168.1.8:~/test_nginx# pip install mysqlclient -i https://pypi.tuna.tsinghua.edu.cn/simple
+  # 首先要生成django系统给我们准备好的一些数据表
+  root@192.168.1.8:~/test_nginx# python manage.py migrate
+  Operations to perform:
+    Apply all migrations: admin, auth, contenttypes, sessions
+  Running migrations:
+    Applying contenttypes.0001_initial... OK
+    Applying auth.0001_initial... OK
+    Applying admin.0001_initial... OK
+    Applying admin.0002_logentry_remove_auto_add... OK
+    Applying admin.0003_logentry_add_action_flag_choices... OK
+    Applying contenttypes.0002_remove_content_type_name... OK
+    Applying auth.0002_alter_permission_name_max_length... OK
+    Applying auth.0003_alter_user_email_max_length... OK
+    Applying auth.0004_alter_user_username_opts... OK
+    Applying auth.0005_alter_user_last_login_null... OK
+    Applying auth.0006_require_contenttypes_0002... OK
+    Applying auth.0007_alter_validators_add_error_messages... OK
+    Applying auth.0008_alter_user_username_max_length... OK
+    Applying auth.0009_alter_user_last_name_max_length... OK
+    Applying auth.0010_alter_group_name_max_length... OK
+    Applying auth.0011_update_proxy_permissions... OK
+    Applying sessions.0001_initial... OK
+  # 交互式启动django服务
+  root@192.168.1.8:~/test_nginx# python manage.py runserver 0.0.0.0:8000
+  Watching for file changes with StatReloader
+  Performing system checks...
+  
+  System check identified no issues (0 silenced).
+  August 31, 2020 - 17:32:33
+  Django version 2.2, using settings 'test_nginx.settings'
+  Starting development server at http://0.0.0.0:8000/
+  Quit the server with CONTROL-C.
+  ```
 
-```bash
-# 安装依赖
-root@192.168.1.8:~/test_nginx# yum install mysql-devel
-root@192.168.1.8:~/test_nginx# pip install mysqlclient -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 首先要生成django系统给我们准备好的一些数据表
-root@192.168.1.8:~/test_nginx# python manage.py migrate
-Operations to perform:
-  Apply all migrations: admin, auth, contenttypes, sessions
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying auth.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying auth.0009_alter_user_last_name_max_length... OK
-  Applying auth.0010_alter_group_name_max_length... OK
-  Applying auth.0011_update_proxy_permissions... OK
-  Applying sessions.0001_initial... OK
-# 交互式启动django服务
-root@192.168.1.8:~/test_nginx# python manage.py runserver 0.0.0.0:8000
-Watching for file changes with StatReloader
-Performing system checks...
+  访问 `8000` 端口，报错如下：
 
-System check identified no issues (0 silenced).
-August 31, 2020 - 17:32:33
-Django version 2.2, using settings 'test_nginx.settings'
-Starting development server at http://0.0.0.0:8000/
-Quit the server with CONTROL-C.
-```
+  ![B192](../images/B192.png)
 
-访问 `8000` 端口，报错如下：
+  同样是 `test_nginx/settings.py` 中的配置问题，默认是只允许本机访问，要开放的话，可以在 `settings.py` 中的修改 `ALLOWED_HOSTS` 的赋值，具体如下：
 
-![B192](../images/B192.png)
+  ```pyton
+  # ALLOWED_HOSTS = []
+  # 添加 *，允许其他主机访问 django 服务
+  ALLOWED_HOSTS = ['*']
+  ```
 
-同样是 `test_nginx/settings.py` 中的配置问题，默认是只允许本机访问，要开放的话，可以在 `settings.py` 中的修改 `ALLOWED_HOSTS` 的赋值，具体如下：
+  ![B216](../images/B216.png)
 
-```pyton
-# ALLOWED_HOSTS = []
-# 添加 *，允许其他主机访问 django 服务
-ALLOWED_HOSTS = ['*']
-```
+6. 基于 `Nginx` 完成 `Django` 工程的部署
 
-![B216](../images/B216.png)
+  ```bash
+  # 激活虚拟环境，目前无效，指定 python 版本后，默认已经是虚拟环境
+  #root@192.168.1.8:~/test_nginx/test_nginx# pyenv activate env-3.8.1
+  # 安装 uwsgi 服务
+  root@192.168.1.8:~/test_nginx/test_nginx# pip install uwsgi -i https://pypi.tuna.tsinghua.edu.cn/simple
+  # 进入工程目录
+  root@192.168.1.8:~/test_nginx/test_nginx# cd ../
+  root@192.168.1.8:~/test_nginx# mkdir uwsgi
+  root@192.168.1.8:~/test_nginx# touch uwsgi/uwsgi.ini
+  # 编辑uwsgi.ini
+  root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
+  root@192.168.1.8:~/test_nginx# cat uwsgi/uwsgi.ini
+  [uwsgi]
+  # 指定监听端口
+  socket = :8000
+  # 重要配置
+  chdir = /root/test_nginx
+  # 重要，要有wsgi.py文件              
+  module = test_nginx.wsgi              
+  
+  master = true
+  # 启动进程数
+  processes = 5
+  threads = 5
+  vacuum = true
+  stats=%(chdir)/uwsgi/uwsgi.status
+  pidfile=%(chdir)/uwsgi/uwsgi.pid
+  # 启动 uwsgi 服务, 使用 -d 参数可以放到后台运行
+  root@192.168.1.8:~/test_nginx# uwsgi -d --ini uwsgi/uwsgi.ini
+  ```
 
-基于 `Nginx` 完成 `Django` 工程的部署
+  `uwsgi` 服务的其它操作。
 
-```bash
-# 激活虚拟环境，目前无效，指定 python 版本后，默认已经是虚拟环境
-#root@192.168.1.8:~/test_nginx/test_nginx# pyenv activate env-3.8.1
-# 安装 uwsgi 服务
-root@192.168.1.8:~/test_nginx/test_nginx# pip install uwsgi -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 进入工程目录
-root@192.168.1.8:~/test_nginx/test_nginx# cd ../
-root@192.168.1.8:~/test_nginx# mkdir uwsgi
-root@192.168.1.8:~/test_nginx# touch uwsgi/uwsgi.ini
-# 编辑uwsgi.ini
-root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
-root@192.168.1.8:~/test_nginx# cat uwsgi/uwsgi.ini
-[uwsgi]
-# 指定监听端口
-socket = :8000
-# 重要配置
-chdir = /root/test_nginx
-# 重要，要有wsgi.py文件              
-module = test_nginx.wsgi              
+  ```bash
+  # 重启
+  root@192.168.1.8:~/test_nginx# uwsgi --reload uwsgi/uwsgi.pid
+  # 停止
+  root@192.168.1.8:~/test_nginx# uwsgi --stop uwsgi/uwsgi.pid
+  # 如果进程杀不死，使用 pkill 命令，-f 正则表达式模式将执行与完全进程参数字符串；-9 强制终止
+  root@192.168.1.8:~/test_nginx# pkill -f uwsgi -9
+  ```
 
-master = true
-# 启动进程数
-processes = 5
-threads = 5
-vacuum = true
-stats=%(chdir)/uwsgi/uwsgi.status
-pidfile=%(chdir)/uwsgi/uwsgi.pid
-# 启动 uwsgi 服务, 使用 -d 参数可以放到后台运行
-root@192.168.1.8:~/test_nginx# uwsgi -d --ini uwsgi/uwsgi.ini
-```
+  配置 `nginx.conf`，将请求转发到 `uwsgi` 服务处理。
 
-`uwsgi` 服务的其它操作。
+  ```conf
+  user root;
+  
+  # 启动的worker进程数
+  worker_processes  2;
+  
+  # 设置每个worker进程的最大连接数，它决定了Nginx的并发能力
+  events {
+      worker_connections  1024;
+  }
+  
+  # http块配置
+  http {
+      include       mime.types;
+      default_type  application/octet-stream;
+  	
+      #sendfile        on;
+  
+  	# 重要参数，是一个请求完成之后还要保持连接多久，不是请求时间多久，
+      # 目的是保持长连接，减少创建连接过程给系统带来的性能损耗
+      keepalive_timeout  65;
+  
+  	# server块配置
+  	server {
+  	   listen         8093;
+  	   server_name    127.0.0.1
+  	   charset UTF-8;
+  	   access_log      /root/nginx/logs/web_access.log;
+  	   error_log       /root/nginx/logs/web_error.log;
+  	
+  	   client_max_body_size 75M;
+  	
+  	   # 最重要的部分
+  	   location / {
+  	       include uwsgi_params;          # 通过uwsgi转发请求
+  	       uwsgi_pass 127.0.0.1:8000;     # 和前面配置django服务的socket端口保持一致
+  	       uwsgi_read_timeout 15;         # 设置请求超时时间
+  	   }
+  	}
+  }    
+  ```
 
-```bash
-# 重启
-root@192.168.1.8:~/test_nginx# uwsgi --reload uwsgi/uwsgi.pid
-# 停止
-root@192.168.1.8:~/test_nginx# uwsgi --stop uwsgi/uwsgi.pid
-# 如果进程杀不死，使用 pkill 命令，-f 正则表达式模式将执行与完全进程参数字符串；-9 强制终止
-root@192.168.1.8:~/test_nginx# pkill -f uwsgi -9
-```
+  重启 `nginx` 服务后，访问 `8093` 端口，我们就可以看到前面访问 `8000` 端口的结果了。不同的是，前面是交互式的，使用的是 `django` 内置的 `uwsgi` 服务。但是线上环境，一般不会这样去部署 `django` 服务，而是使用 `nginx + uwsgi` 配合部署 `django web` 服务。
 
-配置 `nginx.conf`，将请求转发到 `uwsgi` 服务处理。
-
-```conf
-user root;
-
-# 启动的worker进程数
-worker_processes  2;
-
-# 设置每个worker进程的最大连接数，它决定了Nginx的并发能力
-events {
-    worker_connections  1024;
-}
-
-# http块配置
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-	
-    #sendfile        on;
-
-	# 重要参数，是一个请求完成之后还要保持连接多久，不是请求时间多久，
-    # 目的是保持长连接，减少创建连接过程给系统带来的性能损耗
-    keepalive_timeout  65;
-
-	# server块配置
-	server {
-	   listen         8093;
-	   server_name    127.0.0.1
-	   charset UTF-8;
-	   access_log      /root/nginx/logs/web_access.log;
-	   error_log       /root/nginx/logs/web_error.log;
-	
-	   client_max_body_size 75M;
-	
-	   # 最重要的部分
-	   location / {
-	       include uwsgi_params;          # 通过uwsgi转发请求
-	       uwsgi_pass 127.0.0.1:8000;     # 和前面配置django服务的socket端口保持一致
-	       uwsgi_read_timeout 15;         # 设置请求超时时间
-	   }
-	}
-}    
-```
-
-重启 `nginx` 服务后，访问 `8093` 端口，我们就可以看到前面访问 `8000` 端口的结果了。不同的是，前面是交互式的，使用的是 `django` 内置的 `uwsgi` 服务。但是线上环境，一般不会这样去部署 `django` 服务，而是使用 `nginx + uwsgi` 配合部署 `django web` 服务。
-
-![B217](../images/B217.png)
+  ![B217](../images/B217.png)
 
 ### 4.8.14 搭建内部 Yum、Pip 源
 
@@ -1239,205 +1248,205 @@ sudo yum install 软件包
 
 * 准备好 `yum` 源包
 
-```bash
-sudo yum install nginx --downloadonly --downloaddir=./
-```
+  ```bash
+  sudo yum install nginx --downloadonly --downloaddir=./
+  ```
 
-这样会将 `Yum` 源对应的 `nginx` 包以及相关依赖下载下来，但并不安装。我们要的就是这些 `rpm` 包。按照上面的方式，下载我们所有想要安装软件的 `rpm` 包，然后将其全部放入到目录 `yum_source` 下，最后连同包和目录压缩成 `yum_source.zip` 文件。
+  这样会将 `Yum` 源对应的 `nginx` 包以及相关依赖下载下来，但并不安装。我们要的就是这些 `rpm` 包。按照上面的方式，下载我们所有想要安装软件的 `rpm` 包，然后将其全部放入到目录 `yum_source` 下，最后连同包和目录压缩成 `yum_source.zip` 文件。
 
 * 上传到某个服务器
 
-上传到 `测试1` 的 `/data` 目录(可以是任意地址)下，并解压，又重新得到 `yum_source` 目录，目录下全是我们需要的 `rpm` 包，可以用目录将这些 rpm 包分类，比如 `ansible` 及其依赖包就放入 `/data/yum_source/ansible` 目录下，这样看起来会比较清晰，而不是所有的包都混在同一个目录下。这样，我们的 `yum` 源其实就构建好了，源地址就是 `/data/yum_source`。
+  上传到 `测试1` 的 `/data` 目录(可以是任意地址)下，并解压，又重新得到 `yum_source` 目录，目录下全是我们需要的 `rpm` 包，可以用目录将这些 rpm 包分类，比如 `ansible` 及其依赖包就放入 `/data/yum_source/ansible` 目录下，这样看起来会比较清晰，而不是所有的包都混在同一个目录下。这样，我们的 `yum` 源其实就构建好了，源地址就是 `/data/yum_source`。
 
 * 构建索引
 
-接下来，我们使用 `createrepo` 这个命令来构建 `yum` 源的索引。这个命令需要单独安装，所以首先需要找一台能联网的机器，将 `createrepo` 所依赖的 `rpm` 下载下来，然后将其放入到 `测试1` 的 `/data/yum_source/createrepo` 目录下。然后我们进入 `/data/yum_source/createrepo` 目录，直接使用 `yum localinstall createrepo-xxx.noarch.rpm` 即可安装该命令。
+  接下来，我们使用 `createrepo` 这个命令来构建 `yum` 源的索引。这个命令需要单独安装，所以首先需要找一台能联网的机器，将 `createrepo` 所依赖的 `rpm` 下载下来，然后将其放入到 `测试1` 的 `/data/yum_source/createrepo` 目录下。然后我们进入 `/data/yum_source/createrepo` 目录，直接使用 `yum localinstall createrepo-xxx.noarch.rpm` 即可安装该命令。
 
-```bash
-# 如果无权限进入，可以改下权限，或者后面得指令使用绝对路径
-cd /data/yum_source/createrepo/
-# 根据下载的包对应安装
-sudo yum localinstall createrepo-0.9.9-28.el7.noarch.rpm
-# 如果没有找到当前目录下的依赖，可以直接用rpm -ivh安装这个目录下的所有依赖包
-sudo rpm -ivh *.rpm
-# 有了createrepo命令，我们用-v参数来对yum源目录建立索引
-sudo createrepo -v /data/yum_source
-```
+  ```bash
+  # 如果无权限进入，可以改下权限，或者后面得指令使用绝对路径
+  cd /data/yum_source/createrepo/
+  # 根据下载的包对应安装
+  sudo yum localinstall createrepo-0.9.9-28.el7.noarch.rpm
+  # 如果没有找到当前目录下的依赖，可以直接用rpm -ivh安装这个目录下的所有依赖包
+  sudo rpm -ivh *.rpm
+  # 有了createrepo命令，我们用-v参数来对yum源目录建立索引
+  sudo createrepo -v /data/yum_source
+  ```
 
-下图中的 repodata 就是 createrepo 命令给整个目录生成的索引文件。
+  下图中的 repodata 就是 createrepo 命令给整个目录生成的索引文件。
 
-![B218](../images/B218.png)
+  ![B218](../images/B218.png)
 
 * Nginx作为静态资源服务器
 
-万事俱备，只差 `Nginx` 作为静态资源服务器来让我们访问到 `yum` 源中的资源。这对 `Nginx` 来说就是轻而易举的事情。进入 `Nginx` 的路径，修改 `nginx.conf` 配置文件，内容如下：
+  万事俱备，只差 `Nginx` 作为静态资源服务器来让我们访问到 `yum` 源中的资源。这对 `Nginx` 来说就是轻而易举的事情。进入 `Nginx` 的路径，修改 `nginx.conf` 配置文件，内容如下：
 
-```bash
-# 进入nginx的配置文件目录
-cat nginx.conf
+  ```bash
+  # 进入nginx的配置文件目录
+  cat nginx.conf
+  
+  user  root;
+  # 根据探测机器cpu核数设置
+  worker_processes  1;
+  
+  events {
+      worker_connections  1024;
+  }
+  
+  http {
+      include       mime.types;
+      default_type  application/octet-stream;
+  
+      sendfile        on;
+  
+      keepalive_timeout  65;
+  
+      server {
+          listen       8093;
+          server_name  localhost;
+  
+          root /data/yum_source;
+          autoindex on;
+          index index.html index.htm;
+      }
+  }
+  ```
 
-user  root;
-# 根据探测机器cpu核数设置
-worker_processes  1;
+  最核心的地方，就是我们加了一个监听 `8093` 的端口配置，将 `8093` 端口过来的请求转向 `/data/yum_source` 目录下的静态文件。我们本地访问这个主机的 `8093` 端口，如下图所示：
 
-events {
-    worker_connections  1024;
-}
+  ![B219](../images/B219.png)
 
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
+  那么如何让 `测试2` 机器使用这个 `yum` 源呢？很简单，只需要将 `测试2` 的 `/etc/yum.repos.d/` 目录下的所有 `repo` 文件备份保存到其他位置，然后新建一个 `repo` 文件，将里面的地址指向这个 `测试1` 即可。具体操作参考下面的 `shell` 命令：
 
-    sendfile        on;
+  ```bash
+  mkdir /etc/yum.repos.d/bak
+  mv /etc/yum.repos.d/*.repo  /etc/yum.repos.d/bak
+  # 新建 internal.repo 文件，并写入 yum 源地址
+  vim /etc/yum.repos.d/internal.repo
+  cat /etc/yum.repos.d/internal.repo
+  [Local-Yum]
+  name=internal yum
+  baseurl=http://192.168.1.8:8093/
+  enabled=1
+  priority=1
+  gpgcheck=0
+  gpgkey=http://192.168.1.8:8093/release.asc
+  ```
 
-    keepalive_timeout  65;
+  注意这里我们将源名称命名为 `Local-Yum` ，接下来我们在 `测试2` 上使用 `yum` 命令安装某个服务(要求 `测试1` 中必须要有该软件的 `rpm` 包)：
 
-    server {
-        listen       8093;
-        server_name  localhost;
+  ```bash
+  yum clean all
+  yum install nginx
+  ```
 
-        root /data/yum_source;
-        autoindex on;
-        index index.html index.htm;
-    }
-}
-```
+  从下图中，可以看到我们的内部源确实生效了，使用的是我们定义的内部源 `Local-Yum` 。此外使用内网源可以大大加快下载软件的速度，提升工作效率。
 
-最核心的地方，就是我们加了一个监听 `8093` 的端口配置，将 `8093` 端口过来的请求转向 `/data/yum_source` 目录下的静态文件。我们本地访问这个主机的 `8093` 端口，如下图所示：
-
-![B219](../images/B219.png)
-
-那么如何让 `测试2` 机器使用这个 `yum` 源呢？很简单，只需要将 `测试2` 的 `/etc/yum.repos.d/` 目录下的所有 `repo` 文件备份保存到其他位置，然后新建一个 `repo` 文件，将里面的地址指向这个 `测试1` 即可。具体操作参考下面的 `shell` 命令：
-
-```bash
-mkdir /etc/yum.repos.d/bak
-mv /etc/yum.repos.d/*.repo  /etc/yum.repos.d/bak
-# 新建 internal.repo 文件，并写入 yum 源地址
-vim /etc/yum.repos.d/internal.repo
-cat /etc/yum.repos.d/internal.repo
-[Local-Yum]
-name=internal yum
-baseurl=http://192.168.1.8:8093/
-enabled=1
-priority=1
-gpgcheck=0
-gpgkey=http://192.168.1.8:8093/release.asc
-```
-
-注意这里我们将源名称命名为 `Local-Yum` ，接下来我们在 `测试2` 上使用 `yum` 命令安装某个服务(要求 `测试1` 中必须要有该软件的 `rpm` 包)：
-
-```bash
-yum clean all
-yum install nginx
-```
-
-从下图中，可以看到我们的内部源确实生效了，使用的是我们定义的内部源 `Local-Yum` 。此外使用内网源可以大大加快下载软件的速度，提升工作效率。
-
-![B220](../images/B220.png)
+  ![B220](../images/B220.png)
 
 三、搭建内部 `Pip` 源
 
-搭建好 `yum` 源之后，我们来看 `pip` 源的搭建过程，其实方式也是差不多。不过这里我们要使用一个开源的工具来帮我们做这件事情（类似于前面的 `createrepo` ），这样会使得 `pip` 源的搭建非常方便。
+  搭建好 `yum` 源之后，我们来看 `pip` 源的搭建过程，其实方式也是差不多。不过这里我们要使用一个开源的工具来帮我们做这件事情（类似于前面的 `createrepo` ），这样会使得 `pip` 源的搭建非常方便。
 
 * 下载开源工具
 
-```bash
-yum install git -y
-# 如果机器无法联网，则直接去下载最新的包，然后传到主机上去
-git clone https://github.com/wolever/pip2pi
-cd pip2pi
-# 使用多个版本安装的原因是，python2.7 生成的依赖清单文件中，有好多包，官方、第三方源找不到，所以使用高版本的 python3.8 生成较新的依赖包文件
-python setup.py install
-python3.8 setup.py install
-```
+  ```bash
+  yum install git -y
+  # 如果机器无法联网，则直接去下载最新的包，然后传到主机上去
+  git clone https://github.com/wolever/pip2pi
+  cd pip2pi
+  # 使用多个版本安装的原因是，python2.7 生成的依赖清单文件中，有好多包，官方、第三方源找不到，所以使用高版本的 python3.8 生成较新的依赖包文件
+  python setup.py install
+  python3.8 setup.py install
+  ```
 
 * 使用该工具
 
-```bash
-# 下载 ansible 以及依赖，这些文件构成了我们 pip 源的一部分
-pip2tgz data/pip_source/ ansible -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 生成依赖清单文件
-pip freeze > requirements.txt
-# 下载清单文件列表中的包
-pip2tgz data/pip_source/ -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
-# 生成 simple 目录
-/usr/bin/dir2pi data/pip_source/
-```
+  ```bash
+  # 下载 ansible 以及依赖，这些文件构成了我们 pip 源的一部分
+  pip2tgz data/pip_source/ ansible -i https://pypi.tuna.tsinghua.edu.cn/simple
+  # 生成依赖清单文件
+  pip freeze > requirements.txt
+  # 下载清单文件列表中的包
+  pip2tgz data/pip_source/ -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+  # 生成 simple 目录
+  /usr/bin/dir2pi data/pip_source/
+  ```
 
-![B226](../images/B226.png)
+  ![B226](../images/B226.png)
 
-!> 使用高版本 `pip2tgz` 下载包，生成目录使用低版本的 `dir2pi`，高版本生成目录报错，不清楚什么意思，先记录下来。
+  !> 使用高版本 `pip2tgz` 下载包，生成目录使用低版本的 `dir2pi`，高版本生成目录报错，不清楚什么意思，先记录下来。
 
-![B221](../images/B221.png)
+  ![B221](../images/B221.png)
 
-下面这个问题，我没遇到，先记录在这里。
+  下面这个问题，我没遇到，先记录在这里。
 
-!> 如果出现 `TypeError: ‘module’ object is not callable` 这样的错误信息，主要是 `pip` 版本太高导致的，需要将 `pip` 降级。解决方案如下：
+  !> 如果出现 `TypeError: ‘module’ object is not callable` 这样的错误信息，主要是 `pip` 版本太高导致的，需要将 `pip` 降级。解决方案如下：
 
-```bash
-# 卸载高版本的pip
-python -m pip uninstall pip
-# yum安装旧版本的pip
-yum install python-pip
-```
+  ```bash
+  # 卸载高版本的pip
+  python -m pip uninstall pip
+  # yum安装旧版本的pip
+  yum install python-pip
+  ```
 
-就是简简单单的这几个命令，`pip` 源文件已经准备好了。我们找台能联网的机器，部署该命令，然后下载我们想要的 `python` 模块文件及其依赖。最后使用 `dir2pi` 给这个 `pip` 目录生成索引以及 `html` 文件。
+  就是简简单单的这几个命令，`pip` 源文件已经准备好了。我们找台能联网的机器，部署该命令，然后下载我们想要的 `python` 模块文件及其依赖。最后使用 `dir2pi` 给这个 `pip` 目录生成索引以及 `html` 文件。
 
 * 使用 `nginx` 做静态资源服务器
 
-最后就是将这个目录打包并上传到对应的 `测试1` 上去，放到 `/data` 目录下，解压得到 `pip` 源目录 `/data/pip_source`。接下来，使用 `nginx` 作为静态资源服务器，将某个端口的根路径指向这里即可。为此，在 `nginx` 中在添加一个端口的配置：
+  最后就是将这个目录打包并上传到对应的 `测试1` 上去，放到 `/data` 目录下，解压得到 `pip` 源目录 `/data/pip_source`。接下来，使用 `nginx` 作为静态资源服务器，将某个端口的根路径指向这里即可。为此，在 `nginx` 中在添加一个端口的配置：
 
-```conf
-# 这个和 yum 还不一样，因为 /data/pip_source 下有生成了的 index.html 页面，在 simple 目录中
-server {
-    listen       8094;
-    server_name  localhost;
+  ```conf
+  # 这个和 yum 还不一样，因为 /data/pip_source 下有生成了的 index.html 页面，在 simple 目录中
+  server {
+      listen       8094;
+      server_name  localhost;
+  
+      root /data/pip_source;
+      autoindex on;
+      autoindex_exact_size off;
+      autoindex_localtime on;
+      location /{
+  
+      }
+  }
+  ```
 
-    root /data/pip_source;
-    autoindex on;
-    autoindex_exact_size off;
-    autoindex_localtime on;
-    location /{
+  修改 `nginx` 的配置后重启，再访问 `测试1` 的 `8094` 端口，结果如下：
 
-    }
-}
-```
+  ![B222](../images/B222.png)
 
-修改 `nginx` 的配置后重启，再访问 `测试1` 的 `8094` 端口，结果如下：
+  ![B223](../images/B223.png)
 
-![B222](../images/B222.png)
+  可以回过头来，看看网上第三方 `pip` 源的地址，都是带上了 `simple` ，比如：
 
-![B223](../images/B223.png)
+  清华源: https://pypi.tuna.tsinghua.edu.cn/simple<br/>
+  阿里源: https://mirrors.aliyun.com/pypi/simple<br/>
+  豆瓣源: http://pypi.douban.com/simple
 
-可以回过头来，看看网上第三方 `pip` 源的地址，都是带上了 `simple` ，比如：
-
-清华源: https://pypi.tuna.tsinghua.edu.cn/simple<br/>
-阿里源: https://mirrors.aliyun.com/pypi/simple<br/>
-豆瓣源: http://pypi.douban.com/simple
-
-这样子的形式和我们搭建的 `pip` 源好像一致，难道他们也是用这样的工具搭建 `pip` 源？
+  这样子的形式和我们搭建的 `pip` 源好像一致，难道他们也是用这样的工具搭建 `pip` 源？
 
 * 使用内部 `pip` 源
 
-使用方式和前面使用第三方 `pip` 源一样，加上 `-i` 参数，指定 `pip` 源地址和端口，如下命令是在 `测试2` 上用 `pip` 安装 `ansible` 工具，使用的正是 `测试1` 作为 `pip` 源。
+  使用方式和前面使用第三方 `pip` 源一样，加上 `-i` 参数，指定 `pip` 源地址和端口，如下命令是在 `测试2` 上用 `pip` 安装 `ansible` 工具，使用的正是 `测试1` 作为 `pip` 源。
 
-```bash
-pip3.8 install ansible -i http://192.168.1.8:8094/simple/ --trusted-host 192.168.1.8
-```
+  ```bash
+  pip3.8 install ansible -i http://192.168.1.8:8094/simple/ --trusted-host 192.168.1.8
+  ```
 
-测试安装的 `ansible` 以及依赖，如果用不到，可以通过以下命令卸载：
+  测试安装的 `ansible` 以及依赖，如果用不到，可以通过以下命令卸载：
 
-```bash
-pip3.8 uninstall ansible
-pip3.8 uninstall jinja2
-pip3.8 uninstall PyYAML
-pip3.8 uninstall cryptography
-pip3.8 uninstall MarkupSafe
-pip3.8 uninstall cffi
-pip3.8 uninstall six
-pip3.8 uninstall pycparser
-```
+  ```bash
+  pip3.8 uninstall ansible
+  pip3.8 uninstall jinja2
+  pip3.8 uninstall PyYAML
+  pip3.8 uninstall cryptography
+  pip3.8 uninstall MarkupSafe
+  pip3.8 uninstall cffi
+  pip3.8 uninstall six
+  pip3.8 uninstall pycparser
+  ```
 
-从执行结果看，我们成功使用内部的 `pip` 源安装了 `ansible` 工具，而且下载速度非常快，接近百兆每秒的速度，其下载速度瓶颈主要在于内部的网络带宽。
+  从执行结果看，我们成功使用内部的 `pip` 源安装了 `ansible` 工具，而且下载速度非常快，接近百兆每秒的速度，其下载速度瓶颈主要在于内部的网络带宽。
 
-![B224](../images/B224.png)
+  ![B224](../images/B224.png)
