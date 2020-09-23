@@ -1,6 +1,6 @@
-<img width="300px" src="/images/CoverLogo.gif">
+<!-- <img width="300px" src="/images/CoverLogo.gif"> -->
 
-<!-- ![CoverLogo](images/CoverLogo.gif ':size=300px') -->
+![CoverLogo](images/CoverLogo.gif ':size=300px')
 
 # WoShiJack's FAQs
 
