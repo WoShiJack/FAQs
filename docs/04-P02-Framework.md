@@ -1,6 +1,8 @@
-## 4.8 Spring Boot
+# 框架 {docsify-ignore}
 
-### 4.8.1 Failed to bind properties under 'spring.datasource' to javax.sql.DataSource
+## 5.1 Spring Boot
+
+### 5.1.1 Failed to bind properties under 'spring.datasource' to javax.sql.DataSource
 
 `Spring Boot` 整合 `Druid` 时，引入了 `Druid` 的数据源，在配置文件 `application.yml` 中配置了相关配置:
 
@@ -99,7 +101,7 @@ public class DruidConfig {
 </dependency>
 ```
 
-### 4.8.2 favicon.ico 图标不显示
+### 5.1.2 favicon.ico 图标不显示
 
 > `Spring Boot` 版本为 `2.2.6`。
 
@@ -157,7 +159,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 }
 ```
 
-### 4.8.3 Spring Boot 2.x 与1.x版本的嵌入式Servlet容器区别
+### 5.1.3 Spring Boot 2.x 与1.x版本的嵌入式Servlet容器区别
 
 ```java
 //在SpringBoot 1.x 中配置嵌入式的Servlet容器
@@ -189,7 +191,7 @@ public WebServerFactoryCustomizer webServerFactoryCustomizer(){
 
 同时， `WebServerFactoryCustomizer` 需使用 `ConfigurableWebServerFactory` 对象实现对 `customize()` 方法的转换才能实现配置。
 
-### 4.8.4 Spring Boot+JPA 项目启动失败，无法扫描到Repository
+### 5.1.4 Spring Boot+JPA 项目启动失败，无法扫描到Repository
 
 根据以下错误，搜了好多都是添加各种注解。
 
@@ -235,7 +237,7 @@ spring:
     show-sql: true
 ```
 
-### 4.8.5 Spring Boot Configuration Annotation Processor not configured
+### 5.1.5 Spring Boot Configuration Annotation Processor not configured
 
 问题：虽然提示了如下错误，但是不影响最终运行效果。
 
@@ -251,7 +253,7 @@ spring:
 
 ![B126](../images/B126.png)
 
-### 4.8.6 Spring Boot应用启动时，不能加载执行resources文件下的SQL文件
+### 5.1.6 Spring Boot应用启动时，不能加载执行resources文件下的SQL文件
 
 在 `Spring Boot 2.0` 版本之前，如果把 `SQL` 文件直接放在 `resources` 文件夹下是可以直接被加载执行，完成数据库的创建和数据的插入,但是要符合相应的规则：
 
@@ -275,7 +277,7 @@ initialization-mode: always
 
 这样就可以加载你的目标 `SQL` 文件了。
 
-### 4.8.7 拦截器排除css，js，svg等静态资源
+### 5.1.7 拦截器排除css，js，svg等静态资源
 
 未排除静态资源的拦截器代码：
 
@@ -301,7 +303,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 ![B123](../images/B123.png)
 
-### 4.8.8 删除表单报错：Request method 'POST' not supported
+### 5.1.8 删除表单报错：Request method 'POST' not supported
 
 ![B121](../images/B121.png)
 
@@ -339,9 +341,9 @@ public String delete(@PathVariable("id") Integer id){
 </script>
 ```
 
-## 4.11 Spring
+## 5.2 Spring
 
-### 4.11.1 AOP 注解事务控制数据库 commit 问题
+### 5.2.1 AOP 注解事务控制数据库 commit 问题
 
 > 在慕课网学习 [Spring AOP 实现之注解配置](http://www.imooc.com/wiki/springlesson/aopan.html) ，代码执行完成后，发现提交动作在释放连接之后，数据没有更新成功。根据 [通过AOP控制事务的案例](https://blog.csdn.net/fy_java1995/article/details/83933673) 得知，需要采用环绕通知。另外查阅官方文档，使用注解 `@EnableAspectJAutoProxy` 替换 XML 中的 `<aop:aspectj-autoproxy></aop:aspectj-autoproxy>` 自动代理配置。
 
@@ -433,13 +435,13 @@ public class TransactionManager {
 }
 ```
 
-### 4.11.2 A ResourcePool could not acquire a resource from its primary factory or source
+### 5.2.2 A ResourcePool could not acquire a resource from its primary factory or source
 
 > 由于粗心，错把数据库名当作表名放到 `SQL` 语句中。
 
 ![B151](../images/B151.png)
 
-### 4.11.3 MySQL低版本驱动连接高版本数据库错误
+### 5.2.3 MySQL低版本驱动连接高版本数据库错误
 
 报错信息如下：
 
@@ -465,7 +467,7 @@ PropertyAccessException 1: org.springframework.beans.MethodInvocationException: 
 
 > `Maven` 配置文件中将驱动版本修改为 `MySQL 8` 版本即可。
 
-### 4.11.4 新建项目后，右键菜单无法新建 XML
+### 5.2.4 新建项目后，右键菜单无法新建 XML
 
 1. 首先添加 `Spring Framework` 依赖信息。
 
@@ -481,9 +483,9 @@ PropertyAccessException 1: org.springframework.beans.MethodInvocationException: 
 
   ![B152](../images/B152.png)
 
-## 4.12 MyBatis
+## 5.3 MyBatis
 
-### 4.12.1 创建 Config 配置文件模板
+### 5.3.1 创建 Config 配置文件模板
 
 > 新建 `MyBatis` 配置文件的时候，发现没有这个选项，在 [MyBatis 头信息](https://www.cnblogs.com/jiaweit/p/10111845.html) 这篇博文中发现，需要自行配置模板。
 

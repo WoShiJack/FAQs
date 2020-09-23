@@ -1,6 +1,8 @@
-## 4.5 Docker
+# 服务器端相关 {docsify-ignore}
 
-### 4.5.1 将镜像源更改为国内的镜像源
+## 6.1 Docker
+
+### 6.1.1 将镜像源更改为国内的镜像源
 
 1. 修改文件路径 `/etc/docker/daemon.json`。
 
@@ -25,7 +27,7 @@
   systemctl restart docker
   ```
 
-### 4.5.2 删除相同IMAGE ID镜像的方法
+### 6.1.2 删除相同IMAGE ID镜像的方法
 
 > 本文转载自 [CSDN](https://blog.csdn.net/wcuuchina/article/details/86062142) 。
 
@@ -51,7 +53,7 @@ docker rmi docker.io/mysql:8.0
 
 ![B97](../images/B97.png)
 
-### 4.5.3 Tomcat外部访问报HTTP Status 404 – Not Found
+### 6.1.3 Tomcat外部访问报HTTP Status 404 – Not Found
 
 问题：默认从官方镜像源拉取的镜像，`Tomcat`版本 `9.0.35`、`8.5.55`、`7` 都出现 `404` 的情况。
 
@@ -142,9 +144,9 @@ docker rmi docker.io/mysql:8.0
 
   ![B99](../images/B99.png)
 
-## 4.6 Maven
+## 6.2 Maven
 
-### 4.6.1 配置远程公共仓库、私服
+### 6.2.1 配置远程公共仓库、私服
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -222,7 +224,7 @@ docker rmi docker.io/mysql:8.0
 </settings>
 ```
 
-### 4.6.2 Unrecognised tag: 'servers' (position: START_TAG seen ...<mirrors>\r\n
+### 6.2.2 Unrecognised tag: 'servers' (position: START_TAG seen ...<mirrors>\r\n
 
 > 因为配置本地私服，设置了私服的用户名、密码时，错把 `<servers>` 标签放到了 `<mirrors>` 中，所以出现了这个问题。
 
@@ -246,7 +248,7 @@ docker rmi docker.io/mysql:8.0
 </mirrors>
   ```
 
-### 4.6.3 No archetype found in remote catalog. Defaulting to internal catalog
+### 6.2.3 No archetype found in remote catalog. Defaulting to internal catalog
 
 ![B178](../images/B178.png)
 
@@ -274,7 +276,7 @@ docker rmi docker.io/mysql:8.0
 
   ![B180](../images/B180.png)
 
-### 4.6.4 局部指定项目 JDK
+### 6.2.4 局部指定项目 JDK
 
 > 以下提供两种方式局部指定项目 `JDK`，全局指定请查看 [4.6.1 配置远程公共仓库、私服](docs/04-PS03-Server-side-correlation.md#_461-配置远程公共仓库、私服) 。
 
@@ -304,11 +306,11 @@ docker rmi docker.io/mysql:8.0
 </build>
 ```
 
-### 4.6.5 Cannot prepare the release because you have local modifications
+### 6.2.5 Cannot prepare the release because you have local modifications
 
 > 通过配置 `maven scm` 进行项目版本管理，创建分支时提示本地有文件变动，发布项目到远程库失败。既然有变动，将本地项目再次提交远程库，然后再次创建分支，顺利通过。
 
-### 4.6.6 搭建 Maven 私服
+### 6.2.6 搭建 Maven 私服
 
 > 参考 [博客园](https://www.cnblogs.com/kongweifeng/p/9369936.html) 这篇文章搭建的私服，后面有时间写一份自己的搭建过程。
 
@@ -316,7 +318,7 @@ docker rmi docker.io/mysql:8.0
 
 [Nexus 帮助文档](https://help.sonatype.com/repomanager3)
 
-### 4.6.7 创建 archetype 时提示 Unknown lifecycle phase ".xxx.xxx"
+### 6.2.7 创建 archetype 时提示 Unknown lifecycle phase ".xxx.xxx"
 
 完整错误信息如下：
 
@@ -340,9 +342,9 @@ PS D:\1-ProgramFiles\1-DevTools\IntelliJ IDEA 2020.1.1\IdeaProjects\gitDemo> mvn
 PS D:\1-ProgramFiles\1-DevTools\IntelliJ IDEA 2020.1.1\IdeaProjects\gitDemo> mvn -s "D:\1-ProgramFiles\1-DevTools\apache-maven-3.6.3\conf\settings.xml" archetype:create-from-project -DpackageName="org.naijuw.gitDemo"
 ```
 
-## 4.7 Git
+## 6.3 Git
 
-### 4.7.1 提交项目到码云远程仓库提示没有权限
+### 6.3.1 提交项目到码云远程仓库提示没有权限
 
 错误如下：
 
@@ -385,7 +387,7 @@ and the repository exists.
   Hi yourname! You've successfully authenticated, but GITEE.COM does not provide shell access.
   ```
 
-### 4.7.2 Git 客户端提交项目到 GitHub 远程仓库提示用户名或密码错误
+### 6.3.2 Git 客户端提交项目到 GitHub 远程仓库提示用户名或密码错误
 
 错误提示如下：
 
@@ -395,9 +397,9 @@ and the repository exists.
 
 ![B252](../images/B252.png)
 
-## 4.8 Nginx
+## 6.4 Nginx
 
-### 4.8.1 ./configure: No such file or directory
+### 6.4.1 ./configure: No such file or directory
 
 ![B184](../images/B184.png)
 
@@ -412,7 +414,7 @@ root@192.168.1.10:~# wget http://nginx.org/download/nginx-1.18.0.tar.gz
 root@192.168.1.10:~# tar -xzf nginx-1.18.0.tar.gz
 ```
 
-### 4.8.2 ./configure: error: C compiler cc is not found
+### 6.4.2 ./configure: error: C compiler cc is not found
 
 ![B185](../images/B185.png)
 
@@ -424,7 +426,7 @@ root@192.168.1.10:~# tar -xzf nginx-1.18.0.tar.gz
 root@192.168.1.10:~# yum -y install gcc gcc-c++ autoconf automake make
 ```
 
-### 4.8.3 nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+### 6.4.3 nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
 
 ![B186](../images/B186.png)
 
@@ -444,7 +446,7 @@ root@192.168.1.10:~# yum -y install gcc gcc-c++ autoconf automake make
 
   ![B188](../images/B188.png)
 
-### 4.8.4 访问 403 错误
+### 6.4.4 访问 403 错误
 
 ![B189](../images/B189.png)
 
@@ -460,7 +462,7 @@ root@192.168.1.10:~# yum -y install gcc gcc-c++ autoconf automake make
 
   ![B191](../images/B191.png)
 
-### 4.8.5 include 指令
+### 6.4.5 include 指令
 
 > 拆分多个文件，配置不同的指令，方便维护。
 
@@ -474,13 +476,13 @@ include ../conf.d/*.conf;
 
 > `include` 标签放在 `server` 标签之后。
 
-### 4.8.6 nginx: [emerg] unknown directive "if(" in /root/nginx/conf/nginx.conf:47
+### 6.4.6 nginx: [emerg] unknown directive "if(" in /root/nginx/conf/nginx.conf:47
 
 ![B194](../images/B194.png)
 
 > 修改 `nginx.conf` 文件后，重新加载配置文件时，提示未知的指令，在 [CSDN](https://blog.csdn.net/doubleqinyan/article/details/90263448) 找到了答案，`if` 和 `(` 要有空格。
 
-### 4.8.7 nginx: [emerg] unknown directive "set_real_ip_from" in /root/nginx/conf/nginx.conf:120
+### 6.4.7 nginx: [emerg] unknown directive "set_real_ip_from" in /root/nginx/conf/nginx.conf:120
 
 ![B198](../images/B198.png)
 
@@ -493,7 +495,7 @@ root@192.168.1.6:~/nginx-1.18.0# ./configure --prefix=/root/nginx --with-http_re
 root@192.168.1.6:~/nginx-1.18.0# make && sudo make install
 ```
 
-### 4.8.8 四层反向代理示例
+### 6.4.8 四层反向代理示例
 
 `nginx.conf` 配置文件：
 
@@ -576,7 +578,7 @@ C:\Users\89349>telnet 192.168.1.6 90
 
 !> `reload` 有时会不生效，如果修改配置文件没有生效，停止 `nginx` 服务，然后启动 `nginx` 服务。
 
-### 4.8.9 七层反向代理示例
+### 6.4.9 七层反向代理示例
 
 > 在慕课网学习 [Nginx 反向代理](http://www.imooc.com/wiki/nginxlesson/reverseproxy.html)，根据示例代码操作一遍，访问 `url` 地址时出现 `502 Bad Gateway`，查看日志得知，代理地址的端口出现问题。
 
@@ -659,7 +661,7 @@ root@192.168.1.6:~# curl http://192.168.1.6:8095/space/jack
 
 !> 一开始没有看日志，一个劲儿的百度，浪费很多时间。同一个错误，原因有可能不同。还有一个就是，慕课网的 `wiki` 错误太多，不过，这些坑也让我解决了很多问题。以后有日志的尽量看日志，没有日志再百度。
 
-### 4.8.10 Nginx 常用命令
+### 6.4.10 Nginx 常用命令
 
 > 部分内容转载自 [慕课网](http://www.imooc.com/wiki/nginxlesson/architecture1.html) 。
 
@@ -737,7 +739,7 @@ root@192.168.1.6:~/nginx/sbin# ll ../logs/access.log
 -rw-r--r--. 1 root root 0 Aug 27 00:09 ../logs/access.log
 ```
 
-### 4.8.11 Nginx 重新编译添加模块
+### 6.4.11 Nginx 重新编译添加模块
 
 > 本文转载自 [慕课网](https://www.imooc.com/article/284566)，部分内容略有调整。
 
@@ -828,7 +830,7 @@ h-http_stub_status_module               \--with-http_gzip_static_module         
 
 > 其他操作和 `http_secure_link` 模块添加时一样，只是在 `./configure` 的最后加了一行 `--add-module=/root/software/echo-nginx-module-0.62rc1` 。
 
-### 4.8.12 secure_link 防盗链
+### 6.4.12 secure_link 防盗链
 
 > 本文转载自 [慕课网](http://www.imooc.com/wiki/nginxlesson/chain.html) ，`md5url.sh` 脚本参考 [博客园](https://www.cnblogs.com/panwenbin-logs/p/8728327.html) ，记录学习过程。
 
@@ -944,7 +946,7 @@ http://192.168.1.6:8094/B210.png?md5=FSs6IIZT94ePfFf2hImTIA&expires=1598572924
 
 ![B215](../images/B215.png)
 
-### 4.8.13 部署 Python 项目
+### 6.4.13 部署 Python 项目
 
 > 本文转载自 [慕课网](http://www.imooc.com/wiki/nginxlesson/nginxpython.html) ，部分内容略有调整。
 
@@ -1223,7 +1225,7 @@ http://192.168.1.6:8094/B210.png?md5=FSs6IIZT94ePfFf2hImTIA&expires=1598572924
 
   ![B217](../images/B217.png)
 
-### 4.8.14 搭建内部 Yum、Pip 源
+### 6.4.14 搭建内部 Yum、Pip 源
 
 > 本文转载自 [慕课网](http://www.imooc.com/wiki/nginxlesson/nginxpractice.html) ，部分内容略有调整。
 

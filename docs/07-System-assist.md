@@ -1,6 +1,8 @@
-## 7.1 Oracle VM VirtualBox
+# 系统辅助 {docsify-ignore}
 
-### 7.1.1 扩展虚拟硬盘容量
+## 10.1 Oracle VM VirtualBox
+
+### 10.1.1 扩展虚拟硬盘容量
 
 > `Oracle VM VirtualBox` 管理器没有提供可视化的方式修改硬盘容量，所以只能通过命令行的方式进行修改。
 
@@ -31,7 +33,7 @@ PS C:\Program Files\Oracle\VirtualBox> .\VBoxManage modifyhd "G:\VirtualBox VMs\
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 ```
 
-### 7.1.2 虚拟机无法启动
+### 10.1.2 虚拟机无法启动
 
 > 最近装了 `Windos 10 Linux 子系统`，导致和 `Oracle VM VirtualBox` 不兼容，所以禁用 `Hyper-V` 就可以正常运行虚拟机了。
 
@@ -44,7 +46,7 @@ PS C:\WINDOWS\system32> bcdedit /set hypervisorlaunchtype off
 
 > 如果运行虚拟机还是不能正常启动，请重启电脑。
 
-### 7.1.3 安装 macOS Big Sur 11.0 Beta
+### 10.1.3 安装 macOS Big Sur 11.0 Beta
 
 > 之前一直用的 `VMware WorkStation`，听说 `Oracle VM VirtualBox` 比较轻。最近苹果的新系统出来了，在虚拟机安装体验一下。
 
@@ -193,7 +195,7 @@ PS C:\WINDOWS\system32> bcdedit /set hypervisorlaunchtype off
 
 > 苹果虚拟机使用欠佳，有能力上黑苹果，有 `money` 上白苹果。
 
-### 7.1.4 虚拟系统克隆
+### 10.1.4 虚拟系统克隆
 
 1. 首先进入 `VirtualBox` 的安装路径，打开 `powershell`，输入 `.\VBoxManage clonehd`，查看克隆命令相关参数。
 
@@ -221,7 +223,7 @@ PS C:\WINDOWS\system32> bcdedit /set hypervisorlaunchtype off
 
   !> 不要提前在目标目录下创建好和虚拟系统名称一致的同名文件夹，否则会提示文件夹已存在，不让创建虚拟机。
 
-### 7.1.5 Could not mount the media/drive 'C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso' (VERR_PDM_MEDIA_LOCKED).
+### 10.1.5 Could not mount the media/drive 'C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso' (VERR_PDM_MEDIA_LOCKED).
 
 > 参考 [简书](https://www.jianshu.com/p/da1bdc673f2e) 解决此问题。
 

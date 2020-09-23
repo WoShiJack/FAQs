@@ -1,8 +1,8 @@
-## 4.1 数据库 {docsify-ignore}
+# 数据库 {docsify-ignore}
 
-### 4.1.1 MySQL
+## 4.1 MySQL
 
-#### 4.1.1.1 1130-Host ‘主机名’ is not allowed to connect to this MySQL server
+### 4.1.1 1130-Host ‘主机名’ is not allowed to connect to this MySQL server
 
 错误提示如下：
 
@@ -20,7 +20,7 @@ flush privileges;
 
 > 执行后，再次连接测试。如果还不行，重启 `MySQL` 服务。
 
-#### 4.1.1.2 2003-Can't connect to MySQL server on ‘IP’(10060)
+### 4.1.2 2003-Can't connect to MySQL server on ‘IP’(10060)
 
 错误提示如下：
 
@@ -66,7 +66,7 @@ flush privileges;
 
   ![B67](../images/B67.png)
 
-#### 4.1.1.3 The server time zone value '�й���׼ʱ��' is unrecognized or represents more than...
+### 4.1.3 The server time zone value '�й���׼ʱ��' is unrecognized or represents more than...
 
 1. 环境说明。
  
@@ -122,7 +122,7 @@ flush privileges;
 !> MySQL 8.0：com.mysql.cj.jdbc.Driver<br/>
    MySQL 5.7：com.mysql.jdbc.Driver
 
-#### 4.1.1.4 1251-Client does not support...
+### 4.1.4 1251-Client does not support...
 
 错误如下：
 
@@ -177,7 +177,7 @@ alter user 'root' identified with mysql_native_password by '1';
 
 ![B82](../images/B82.png)
 
-#### 4.1.1.5 排序规则和字符集的修改
+### 4.1.5 排序规则和字符集的修改
 
 !> 在对数据库进行任何修改之前，请先备份数据。
 
@@ -248,7 +248,7 @@ AND
 );
 ```
 
-#### 4.1.1.6 MySQL 8.0 安装
+### 4.1.6 MySQL 8.0 安装
 
 一、下载 `MySQL`
 
@@ -316,7 +316,7 @@ AND
 
   如果返回 `Query OK, 0 rows affected`，则表示密码重置成功。
 
-#### 4.1.1.7 1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server...
+### 4.1.7 1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server...
 
 问题如下图所示:
 
@@ -324,7 +324,7 @@ AND
 
 原因：`primary key(id),` 这里多了一个逗号，去掉后运行成功。
 
-#### 4.1.1.8 忘记 MySQL 数据库连接密码后重置
+### 4.1.8 忘记 MySQL 数据库连接密码后重置
 
 > 本文部分内容转载自 [CSDN](https://blog.csdn.net/weidong_y/article/details/80493743) 。
 
@@ -426,9 +426,9 @@ AND
 
   ![B248](../images/B248.png)
 
-### 4.1.2 PostgreSQL
+## 4.2 PostgreSQL
 
-#### 4.1.2.1 解压版安装
+### 4.2.1 解压版安装
 
 > 本文部分内容转载自 [开源中国](https://my.oschina.net/ososchina/blog/860341) 。
 
@@ -621,15 +621,15 @@ AND
   服务器进程已经启动
   ```
 
-### 4.1.3 Oracle
+## 4.3 Oracle
 
-### 4.1.4 SQL Server
+## 4.4 SQL Server
 
-### 4.1.5 管理工具
+## 4.5 管理工具
 
-#### 4.1.5.1 DataGrip
+### 4.5.1 DataGrip
 
-##### 4.1.5.1.1 DataGrip 连接后看不到自己创建的数据库
+#### 4.5.1.1 DataGrip 连接后看不到自己创建的数据库
 
 1. 首先先连接自己的数据库。
 
@@ -643,13 +643,13 @@ AND
 
   ![B37](../images/B37.png)
 
-#### 4.1.5.2 Navicat Premium
+### 4.5.2 Navicat Premium
 
-##### 4.1.5.2.1 点击左上角工具栏菜单闪退
+#### 4.5.2.1 点击左上角工具栏菜单闪退
 
 解决方案：网易有道词典导致闪退的，关闭后使用 `Navicat`，一切正常。
 
-##### 4.1.5.2.2 Navicat Premium 15 无法备份数据库为 psc 格式
+#### 4.5.2.2 Navicat Premium 15 无法备份数据库为 psc 格式
 
 > `Navicat` 新版本备份格式为 `nb3` 。
 

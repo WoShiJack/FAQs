@@ -1,8 +1,8 @@
-## 2.1 Linux {docsify-ignore}
+# Linux {docsify-ignore}
 
-### 2.1.1 CentOS
+## 2.1 CentOS
 
-#### 2.1.1.1 CentOS 7 清空终端屏幕
+### 2.1.1 CentOS 7 清空终端屏幕
 
 > 终端操作的时候产生很多信息，如下图：
 
@@ -20,7 +20,7 @@
 
    ![A8](../images/A8.png)
 
-#### 2.1.1.2 CentOS 7 删除多余的内核
+### 2.1.2 CentOS 7 删除多余的内核
 
 解决方案：
 
@@ -44,7 +44,7 @@
 
 4. 重启之后就可以看到内核被删掉了，同时多余的启动项也自动删掉了。
 
-#### 2.1.1.3 CentOS 7 中安装或升级最新的内核
+### 2.1.3 CentOS 7 中安装或升级最新的内核
 
 > 本文转载自 [Linux 中国][GlobalLink-2.1.1.3-1]，部分内容略有调整。
 
@@ -177,7 +177,7 @@ via：[http://www.tecmint.com/install-upgrade-kernel-version-in-centos-7/](http:
 
 [GlobalLink-2.1.1.3-2]: https://www.kernel.org/
 
-#### 2.1.1.4 wget 命令
+### 2.1.4 wget 命令
 
 > 本文转载自 [博客园](https://www.cnblogs.com/jiufen/p/5013678.html)，部分内容略有调整。
 
@@ -202,7 +202,7 @@ http://192.168.1.3:3000/favicon.ico
 http://192.168.1.3:3000/index.html
 ```
 
-#### 2.1.1.5 netstat 命令
+### 2.1.5 netstat 命令
 
 安装 `netstat` 。
 
@@ -249,7 +249,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 udp        0      0 0.0.0.0:68              0.0.0.0:*                           986/dhclient
 ```
 
-#### 2.1.1.6 查看系统版本
+### 2.1.6 查看系统版本
 
 解决方案：
 
@@ -257,7 +257,7 @@ udp        0      0 0.0.0.0:68              0.0.0.0:*                           
 root@192.168.1.10:~# cat /etc/redhat-release
 ```
 
-#### 2.1.1.7 sudo 命令
+### 2.1.7 sudo 命令
 
 安装 `sudo` 。
 
@@ -265,7 +265,7 @@ root@192.168.1.10:~# cat /etc/redhat-release
 root@192.168.1.10:~# yum -y install sudo
 ```
 
-#### 2.1.1.8 rm 命令
+### 2.1.8 rm 命令
 
 > 因为重复下载多个版本的软件以及解压产生的文件夹，所以记录删除命令。
 
@@ -276,7 +276,7 @@ root@192.168.1.10:~# yum -y install sudo
 root@192.168.1.10:~# rm -rf nginx-1.18.0
 ```
 
-#### 2.1.1.9 mv 命令
+### 2.1.9 mv 命令
 
 1. 重命名文件或目录。
 
@@ -293,7 +293,7 @@ root@192.168.1.10:~# rm -rf nginx-1.18.0
   root@192.168.1.6:~# mv *.tgz software
   ```
 
-#### 2.1.1.10 mkdir、touch 命令
+### 2.1.10 mkdir、touch 命令
 
 解决方案：
 
@@ -304,7 +304,7 @@ root@192.168.1.10:~# mkdir demodir
 root@192.168.1.10:~# touch demofile.txt
 ```
 
-#### 2.1.1.11 查看程序是否启动
+### 2.1.11 查看程序是否启动
 
 解决方案：
 
@@ -313,7 +313,7 @@ root@192.168.1.10:~# touch demofile.txt
 root@192.168.1.10:~# ps -ef | grep nginx
 ```
 
-#### 2.1.1.12 cp 命令
+### 2.1.12 cp 命令
 
 解决方案：
 
@@ -346,11 +346,11 @@ cp -a yum_source/ data/
 cp -r /test /root
 ```
 
-#### 2.1.1.13 CentOS 8 安装教程
+### 2.1.13 CentOS 8 安装教程
 
 > 通过 [CSDN](https://blog.csdn.net/l1028386804/article/details/105479495) 文章安装了 `CentOS`，抽空写一篇自己的安装过程。
 
-#### 2.1.1.14 cat、head、tail 的区别
+### 2.1.14 cat、head、tail 的区别
 
 `cat` 查看的是整个文件内容。
 
@@ -376,7 +376,7 @@ root@192.168.1.6:~/nginx/conf# tail -2 ../logs/access.log
 
 ![B197](../images/B197.png)
 
-#### 2.1.1.15 生成密码文件
+### 2.1.15 生成密码文件
 
 ```bash
 # 安装 httpd-tools
@@ -389,7 +389,7 @@ root@192.168.1.6:~/nginx/sbin# cat /root/user.pass
 store:$apr1$xJGvt1Kc$7SAtusUhdWgb8KRdxYY7P0
 ```
 
-#### 2.1.1.16 yum 命令
+### 2.1.16 yum 命令
 
 ```bash
 # 查找软件包 
@@ -459,7 +459,7 @@ yum info extras
 yum provides
 ```
 
-#### 2.1.1.17 停止进程
+### 2.1.17 停止进程
 
 ```bash
 # 查询 nginx 主进程号
@@ -472,7 +472,7 @@ kill -TERM 主进程号 # kill -TERM 7546 （主进程以及相关进程都会�
 kill -9 主进程号    # kill -9 -97665 （只能停止 master 主进程，相关无法停止）
 ```
 
-#### 2.1.1.18 扩展存储空间
+### 2.1.18 扩展存储空间
 
 > 安装 `Python` 的时候，提示空间不足，参考 [百度经验](https://jingyan.baidu.com/article/ca00d56cad34dda89febcf7b.html) 解决了此问题。
 
@@ -752,7 +752,7 @@ kill -9 主进程号    # kill -9 -97665 （只能停止 master 主进程，相�
   tmpfs                     99M     0   99M   0% /run/user/0
   ```
 
-#### 2.1.1.19 Centos 7.8 误删 Python 2.7 之后，导致 yum 无法使用
+### 2.1.19 Centos 7.8 误删 Python 2.7 之后，导致 yum 无法使用
 
 > 最近学习 `uwsgi协议的反向代理`，使用 `pip` 安装 `uwsgi`，提示没有 `pip` 这个命令，所以卸载了系统的 `Python 2.7`，安装了 `Python 3.8.5` 新版本，以下解决方案参考 [博客园](https://www.cnblogs.com/sueyyyy/p/10410832.html) 。
 
@@ -826,7 +826,7 @@ whereis python|xargs rm -frv
 
   ![B208](../images/B208.png)
 
-#### 2.1.1.20 安装 Python 3.8.5
+### 2.1.20 安装 Python 3.8.5
 
 > 参考 [CSDN](https://blog.csdn.net/qq_42353939/article/details/94609591) 文章记录安装步骤，内容略有调整。
 
@@ -916,7 +916,7 @@ whereis python|xargs rm -frv
 
 2. 接着，`Python` 安装步骤 4~5，重新运行一遍。
 
-#### 2.1.1.21 tailf、tail -f、tail -F 三者区别
+### 2.1.21 tailf、tail -f、tail -F 三者区别
 
 > 本文转载自 [博客园](https://www.cnblogs.com/jackzz/p/9358213.html) 。
 
@@ -952,7 +952,7 @@ whereis python|xargs rm -frv
 	</tr>
 </table>
 
-#### 2.1.1.22 crontab 命令
+### 2.1.22 crontab 命令
 
 > 本文转载自 [博客园](https://www.cnblogs.com/xssxss/archive/2012/12/04/2801050.html) 。
 
@@ -968,7 +968,7 @@ whereis python|xargs rm -frv
 
 6. 按下 `Shift + :` 输入 `wq` 退出 `crontab` 。
 
-#### 2.1.1.23 zip、unzip 命令
+### 2.1.23 zip、unzip 命令
 
 > 本文转载自 [CSDN](https://blog.csdn.net/crazycui/article/details/52239234)，部分内容略有调整。
 
@@ -1035,7 +1035,7 @@ root@192.168.1.6:~# chmod +x unzip.sh
 root@192.168.1.6:~# sh unzip.sh
 ```
 
-#### 2.1.1.24 修改系统时间以及时区
+### 2.1.24 修改系统时间以及时区
 
 > 参考 [博客园-文帅不吃香菜](https://www.cnblogs.com/yizhipanghu/p/11579516.html) 、 [博客园-白不菜](https://www.cnblogs.com/BaiGuodong/p/5532124.html) 、 [CSDN](https://blog.csdn.net/boy_vansun/article/details/50735706) 三篇文章修改。
 
@@ -1149,7 +1149,7 @@ root@192.168.1.6:~# sh unzip.sh
            'timedatectl set-local-rtc 0'.
   ```
 
-#### 2.1.1.25 reboot 和 init 6 的区别
+### 2.1.25 reboot 和 init 6 的区别
 
 > 本文转载自 [博客园](https://www.cnblogs.com/yizhipanghu/p/11579516.html) 。
 
@@ -1167,7 +1167,7 @@ init 6 Stop the operating system and reboot to the state defined by the initdefa
 我们应该在通常情况下使用 `init 6` 。<br/>
 在出问题的状况下或强制重启时使用 `reboot` 。
 
-#### 2.1.1.26 误删 root 目录
+### 2.1.26 误删 root 目录
 
 > 本文转载自 [CSDN](https://blog.csdn.net/m0_38014125/article/details/80782693)，内容略有调整。
 
@@ -1186,7 +1186,7 @@ init 6 Stop the operating system and reboot to the state defined by the initdefa
   cp -a /etc/skel/.[!.]* /root
   ```
 
-#### 2.1.1.27 vim 命令
+### 2.1.27 vim 命令
 
 | 序号 |       命令       |    含义    |
 | :--: | :--------------: | :--------: |
@@ -1199,7 +1199,7 @@ init 6 Stop the operating system and reboot to the state defined by the initdefa
 root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
 ```
 
-#### 2.1.1.28 sudo su 和 su 的区别
+### 2.1.28 sudo su 和 su 的区别
 
 > 本文转载自 [博客园](https://www.cnblogs.com/jiading/p/11717388.html) 。
 
@@ -1225,7 +1225,7 @@ root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
 
 由于不需要超级用户的密码，部分类 `Unix` 系统甚至利用 `sudo` 使一般用户取代超级用户作为管理帐号，例如 `Ubuntu` 、`Mac OS` 等。
 
-#### 2.1.1.29 设置静态 IP
+### 2.1.29 设置静态 IP
 
 > 参考 [博客园](https://www.cnblogs.com/qianyuliang/archive/2019/09/26/11591970.html) 文章修改静态 `IP` 。
 
@@ -1315,9 +1315,9 @@ root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
   完整的用法细节，可参考 nmcli(1) 和 nmcli-examples(7) 手册页。
   ```
 
-### 2.1.2 Kali
+## 2.2 Kali
 
-#### 2.1.2.1 设置静态 IP
+### 2.2.1 设置静态 IP
 
 > 参考 [CSDN](https://blog.csdn.net/veiTian/article/details/108318591) 文章修改静态 `IP` 。
 

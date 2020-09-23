@@ -1,6 +1,6 @@
-## 1.1 Windows {docsify-ignore}
+# Windows {docsify-ignore}
 
-### 1.1.1 修改hosts文件
+## 1.1 修改hosts文件
 
 > 因为当前用户没有权限， `hosts` 文件是修改不了的。有些时候某些软件需要对这个文件进行操作，所以不得不通过管理员的权限进行修改。
 
@@ -38,7 +38,7 @@
 
   !> 将 `hosts` 的 `只读` 权限勾选回来，因为不确定什么时候会有恶意程序利用这个漏洞。
 
-### 1.1.2 PowerShell 切换成 CMD
+## 1.2 PowerShell 切换成 CMD
 
 > 因为 `CMD` 有很多命令在 `PowerShell` 中无法直接运行，需要切换模式。
 
@@ -52,7 +52,7 @@ Microsoft Windows [版本 10.0.19042.330]
 C:\WINDOWS\system32>
 ```
 
-### 1.1.3 PowerShell 进入 Program File 文件夹时出错
+## 1.3 PowerShell 进入 Program File 文件夹时出错
 
 > `CMD` 模式下，进入 `Program File` 是没有问题的，但是 `PowerShell` 访问时，如果有空格或者中文就需要加上 `""`，才可以访问。
 
@@ -61,7 +61,7 @@ PS C:\WINDOWS\system32> cd "C:\Program Files"
 PS C:\Program Files>
 ```
 
-### 1.1.4 操作路由表项
+## 1.4 操作路由表项
 
 1. 查看电脑内部路由。
 

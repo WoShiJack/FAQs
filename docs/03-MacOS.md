@@ -1,1 +1,1 @@
-## 3.1 MacOS {docsify-ignore}
+# MacOS {docsify-ignore}

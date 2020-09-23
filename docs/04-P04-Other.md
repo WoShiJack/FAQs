@@ -1,8 +1,10 @@
-## 4.2 编辑器
+# Other {docsify-ignore}
 
-### 4.2.1 Visual Studio Code
+## 7.1 编辑器
 
-#### 4.2.1.1 代码自动换行设置
+### 7.1.1 Visual Studio Code
+
+#### 7.1.1.1 代码自动换行设置
 
 1. `File`→ `Preferences` → `Settings`。
 
@@ -14,7 +16,7 @@
 
   ![B88](../images/B88.png)
 
-#### 4.2.1.2 预览 Markdown 文档
+#### 7.1.1.2 预览 Markdown 文档
 
 > 本文转载自 [php中文网](https://www.php.cn/tool/vscode/440259.html) 。
 
@@ -26,9 +28,11 @@
 
   ![B250](../images/B250.png)
 
-### 4.2.2 IntelliJ IDEA
+##  7.2 IDE
 
-#### 4.2.2.1 启动Tomcat，控制台出现乱码
+### 7.2.1 IntelliJ IDEA
+
+#### 7.2.1.1 启动Tomcat，控制台出现乱码
 
 1. 设置 `IDEA Tomcat Server` 的编码。在菜单栏找到 `Run` → `Edit Configuration...`，选中配置的 `Tomcat`，找到 `Server` 选项卡 设置 `VM options` 为：
 
@@ -48,7 +52,7 @@
 
 3. 重启 `IntelliJ IDEA`。
 
-#### 4.2.2.2 项目目录结构调整
+#### 7.2.1.2 项目目录结构调整
 
 1. 目录结构层次不够分明。
 
@@ -66,7 +70,7 @@
 
   ![B105](../images/B105.png)
 
-#### 4.2.2.3 快捷键
+#### 7.2.1.3 快捷键
 
 1. 【Ctrl+Tab】切换标签页。
 
@@ -128,7 +132,7 @@
 
   ![B120](../images/B120.gif)
 
-#### 4.2.2.4 去掉屏幕右侧垂直白线
+#### 7.2.1.4 去掉屏幕右侧垂直白线
 
 ![B139](../images/B139.png)
 
@@ -144,7 +148,7 @@
 
   > `Show method separators` 是方法与方法之间的分割线，如果不小心勾选了，可以取消勾选。
 
-#### 4.2.2.5 foreach 代码补全换行问题
+#### 7.2.1.5 foreach 代码补全换行问题
 
 ![B174](../images/B174.png)
 
@@ -158,7 +162,7 @@
 
   > 编辑器中输入 `iter` 后，然后 `Tab`，也可以实现 `foreach` 的代码补全。
 
-#### 4.2.2.6 删除自定义的 archetype
+#### 7.2.1.6 删除自定义的 archetype
 
 > 因为测试添加的 `archetype`，用不到了，所以想把它删除掉，但是 `IDEA` 中没有删除的地方，通过 [CSDN](https://blog.csdn.net/u012843189/article/details/83180007) 这篇博客了解到，可以从 `XML` 文件中将它清理掉。
 
@@ -174,7 +178,7 @@
 
   ![B177](../images/B177.png)
 
-#### 4.2.2.7 IDEA 终端不能运行 Maven 命令
+#### 7.2.1.7 IDEA 终端不能运行 Maven 命令
 
 > 参考 [博客园](https://www.cnblogs.com/wswyy/p/13084955.html) 解决此问题。
 
@@ -184,9 +188,9 @@
 
   ![B181](../images/B181.png)
 
-## 4.3 RabbitMQ
+## 7.3 RabbitMQ
 
-### 4.3.1 Docker下安装了RabbitMQ,无法访问web管理页面
+### 7.3.1 Docker下安装了RabbitMQ,无法访问web管理页面
 
 原因：在拉取 `RabbitMQ` 时，默认拉取了 `latest` 版本，而这个不带 `web管理界面`，因此访问不到。
 
@@ -216,9 +220,9 @@
 
 * 拉取 `manager` 版本的镜像。
 
-## 4.4 Elasticsearch
+## 7.4 Elasticsearch
 
-### 4.4.1 Docker下安装了RabbitMQ，无法访问web管理页面
+### 7.4.1 Docker下安装了RabbitMQ，无法访问web管理页面
 
 1. 因为是后台启动，输入命令查看启动错误日志。
 
@@ -246,9 +250,9 @@
 
   ![B94](../images/B94.png)
 
-## 4.7 Log4j
+## 7.5 Log4j
 
-### 4.7.1 Log4j:ERROR Category option " 1 " not a decimal integer.
+### 7.5.1 Log4j:ERROR Category option " 1 " not a decimal integer.
 
 原因：因为`log4j.properties` 配置文件中有空格，所以出现了错误。
 
@@ -264,7 +268,7 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{ 1 }:%L - 
 log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m%n
 ```
 
-### 4.7.2 Log4j2 could not find a logging implementation 
+### 7.5.2 Log4j2 could not find a logging implementation 
 
 解决方案：
 
@@ -313,11 +317,11 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 > `Maven 依赖、log4j.xml` 缺一不可，没有的话都会报错。
 
 
-## 4.9 轻量级标记语言
+## 7.6 轻量级标记语言
 
-### 4.9.1 Markdown
+### 7.6.1 Markdown
 
-#### 4.9.1.1 首行缩进的两种方法
+#### 7.6.1.1 首行缩进的两种方法
 
 > 本文转载自 [简书](https://www.jianshu.com/p/5827c325bc92) 部分内容略有调整。
 
@@ -335,14 +339,14 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
 > 缩进推荐使用 `全角空格`，因为搜索的时候不会出现第二种方法的代码。
 
-#### 4.9.1.2 换行
+#### 7.6.1.2 换行
 
 序号|方法|说明
 :---:|:---:|:---:
 1|空格键|两个空格键 + 回车键
 2|`<br/>`|换行符和 HTML 中的语法一样
 
-#### 4.9.1.3 代码块缩进问题
+#### 7.6.1.3 代码块缩进问题
 
 > 对文档格式进行调整时，发现代码块无法缩进。反复尝试后发现，如果代码块之前有无序列表或者有序列表，使用两个半角空格就可以实现；如果代码块之前只有正文，则半角空格不起作用。
 
@@ -368,7 +372,7 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
 > 从上面的示例可以看出，解决方案下的内容，缩进明显不同。
 
-#### 4.9.1.4 超链接的全局声明
+#### 7.6.1.4 超链接的全局声明
 
 > 如果文档中多次出现同一个链接，就可以将链接提取出来，作为全局链接使用。
 
@@ -394,11 +398,11 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
 > 需要注意的是，超链接的全局声明放在文档最后。另外，如果声明多个链接，`链接ID` 不要重复，我这里使用 `一个单词-章节ID-章节中第几个链接`，用中划线 `-` 拼接起来。
 
-## 4.10 文档网站生成器
+## 7.8 文档网站生成器
 
-### 4.10.1 docsify
+### 7.8.1 docsify
 
-#### 4.10.1.1 部署文档网站到 GitHub
+#### 7.8.1.1 部署文档网站到 GitHub
 
 1. 下载 [Git](https://git-scm.com/download/win) 并安装。
 
@@ -446,9 +450,9 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
   ![B149](../images/B149.png)
 
-## 4.13 Python
+## 7.9 Python
 
-### 4.13.1 ModuleNotFoundError: No module named '_pydev_bundle'
+### 7.9.1 ModuleNotFoundError: No module named '_pydev_bundle'
 
 > 本文转载自 [CSDN](https://blog.csdn.net/gotowest123/article/details/103022022) 。
 
@@ -466,7 +470,7 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
 > `ModuleNotFoundError: No module named 'xxx'` 这类错误也有可能是 `Python` 压缩包程序的问题。
 
-### 4.13.2 can't open file 'migrate': [Errno 2] No such file or directory
+### 7.9.2 can't open file 'migrate': [Errno 2] No such file or directory
 
 > 执行命令 `python migrate` 提示找不到文件或目录，参考 [博客园](https://www.cnblogs.com/Zhao159461/p/11527734.html) 文章解决了此问题。
 
@@ -546,7 +550,7 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
   > 命令中的 `AppDemo` 不输也没什么影响。
 
-### 4.13.3 REPL Communication 无限等待问题
+### 7.9.3 REPL Communication 无限等待问题
 
 ![B163](../images/B163.png)
 
@@ -580,7 +584,7 @@ log4j.appender.stdout.layout.ConversionPattern =  %d{ABSOLUTE} %5p %c{1}:%L - %m
 
   ![B169](../images/B169.png)
 
-### 4.13.4  xxx.DoesNotExist: xxx matching query does not exist
+### 7.9.4  xxx.DoesNotExist: xxx matching query does not exist
 
 > `Django` 的 `get` 方法是从数据库的取得一个匹配的结果，返回一个对象，如果记录不存在的话，它会报错。
 
@@ -605,7 +609,7 @@ Traceback (most recent call last):
 AppDemo.models.StudentsModel.DoesNotExist: StudentsModel matching query does not exist.
 ```
 
-### 4.13.5 'Meta.fields' must not contain non-model field names：xxx
+### 7.9.5 'Meta.fields' must not contain non-model field names：xxx
 
 ![B173](../images/B173.png)
 
@@ -626,15 +630,15 @@ class StudentsViewSet(ModelViewSet):
     filter_fields = ['s_age']
 ```
 
-### 4.13.6 关键字参数
+### 7.9.6 关键字参数
 
 > 初步了解 `Python` 时，发现函数的参数是 `**keywords`，有些不解，看过 [Python官网关于参数的文档](https://docs.python.org/3/tutorial/controlflow.html#unpacking-argument-lists) 后，原来这是这门语言关于特殊参数的定义，详细请看链接中的 `4.7.3.特殊参数 ~ 4.7.3.5.回顾`。
 
-### 4.13.7 PyCharm 没有智能提示
+### 7.9.7 PyCharm 没有智能提示
 
 > 因为 `Python` 是运行时才会识别类型，所以没有初始化的对象是没有提示的。可以在 `PyCharm` 的 `Python Console` 中运行代码，查看右侧对象初始化的状态。
 
-### 4.13.8 下载 B站、腾讯等网站上的视频（非 VIP 视频）
+### 7.9.8 下载 B站、腾讯等网站上的视频（非 VIP 视频）
 
 > 本文转载自 [知乎](https://www.zhihu.com/question/310725414/answer/586853403) 、[CSDN](https://blog.csdn.net/Chanssl/article/details/83050959) 两篇文章。
 

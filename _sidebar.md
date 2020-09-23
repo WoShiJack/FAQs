@@ -9,10 +9,10 @@
 
 * 软件
   * 编程
-    * [数据库](docs/04-PS01-Database.md)
-    * [框架](docs/04-PS02-Framework.md)
-    * [服务器端相关](docs/04-PS03-Server-side-correlation.md)
-    * [其他](docs/04-Programming.md)
+    * [数据库](docs/04-P01-Database.md)
+    * [框架](docs/04-P02-Framework.md)
+    * [服务器端相关](docs/04-P03-Server-side-correlation.md)
+    * [其他](docs/04-P04-Other.md)
   * [办公](docs/05-Office.md)
   * [多媒体处理工具](docs/06-Media-processing-tools.md)
   * [系统辅助](docs/07-System-assist.md)
