@@ -1315,6 +1315,257 @@ root@192.168.1.8:~/test_nginx# vim uwsgi/uwsgi.ini
   完整的用法细节，可参考 nmcli(1) 和 nmcli-examples(7) 手册页。
   ```
 
+### 2.1.30 安装 MySQL 8
+
+> 本文转载自 [CSDN](https://blog.csdn.net/qq_36539042/article/details/125385002) 。
+
+1. 到指定目录下下载安装包
+
+  ```bash
+  [root@VM-0-14-centos ~]# cd /usr/local/src
+  ```
+
+  ![B259](../images/B259.png)
+
+2. 下载MySQL 8
+
+  ```bash
+  [root@VM-0-14-centos src]# wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.31-linux-glibc2.12-x86_64.tar.xz
+  ```
+
+  ![B260](../images/B260.png)
+
+  > [MySQL 各个版本下载](https://dev.mysql.com/downloads/mysql/)
+
+3. 解压MySQL 8, 通过xz命令解压出tar包， 然后通过tar命令解压出文件夹
+
+  ```bash
+  [root@VM-0-14-centos src]# xz -d mysql-8.0.31-linux-glibc2.12-x86_64.tar.xz
+  [root@VM-0-14-centos src]# tar xvf mysql-8.0.31-linux-glibc2.12-x86_64.tar
+  ```
+
+  ![B261](../images/B261.png)
+  ![B262](../images/B262.png)
+
+4. 将/usr/local/src下的mysql-8.0.31-linux-glibc2.12-x86_64文件夹内容移动到/usr/local/mysql下
+
+  ```bash
+  [root@VM-0-14-centos src]# mkdir /usr/local/mysql
+  [root@VM-0-14-centos src]# mv /usr/local/src/mysql-8.0.31-linux-glibc2.12-x86_64/* /usr/local/mysql
+  [root@VM-0-14-centos src]# cd /usr/local/mysql
+  ```
+
+  ![B263](../images/B263.png)
+
+5. 创建用户组及用户和密码
+
+  ```bash
+  [root@VM-0-14-centos mysql]# groupadd mysql
+  [root@VM-0-14-centos mysql]# useradd -g mysql mysql
+  ```
+
+  ![B264](../images/B264.png)
+
+6. 授权用户
+
+  ```bash
+  [root@VM-0-14-centos mysql]# chown -R mysql.mysql /usr/local/mysql
+  ```
+
+  ![B265](../images/B265.png)
+
+7. 编辑my.cnf文件
+
+  ```bash
+  [root@VM-0-14-centos mysql]# vim /etc/my.cnf
+  ```
+  > 按大写 i 进入修改模式 然后将下面的文本复制进去
+
+  ```config
+  [mysqld]
+
+  user=root
+
+  datadir=/usr/local/mysql/data
+
+  basedir=/usr/local/mysql
+
+  port=3306
+
+  max_connections=200
+
+  max_connect_errors=10
+
+  character-set-server=utf8
+
+  default-storage-engine=INNODB
+
+  default_authentication_plugin=mysql_native_password
+
+  lower_case_table_names=1
+
+  group_concat_max_len=102400
+
+  [mysql]
+
+  default-character-set=utf8
+
+  [client]
+
+  port=3306
+
+  default-character-set=utf8
+  ```
+
+  ![B266](../images/B266.png)
+
+  > 复制进去后按esc退出修改模式，然后按 shift+: 然后输入wq保存文件
+
+8. 进入到bin目录下
+
+  ```bash
+  [root@VM-0-14-centos mysql]# cd bin
+  ```
+
+  ![B267](../images/B267.png)
+
+9. 初始化基础信息，最后一行后面会有个随机的初始密码保存下来一会登录要用(如果忘记了就删掉data重新初始化)
+
+  ```bash
+  [root@VM-0-14-centos bin]# ./mysqld --initialize
+  ```
+
+  > 如果提示 ：./mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory
+
+  ![B268](../images/B268.png)
+
+  > 就执行下下面这个再执行初始化
+
+  ```bash
+  [root@VM-0-14-centos bin]# yum install -y libaio
+  [root@VM-0-14-centos bin]# yum -y install numactl
+  ```
+
+  ![B269](../images/B269.png)
+  ![B270](../images/B270.png)
+
+  ```bash
+  [root@VM-0-14-centos bin]# ./mysqld --initialize
+  ```
+
+  ![B271](../images/B271.png)
+
+  记录日志最末尾位置root@localhost:后的字符串，此字符串为mysql管理员临时登录密码
+
+10. 添加mysqld服务到系统
+  
+  > 先返回到mysql目录
+
+  ```bash
+  [root@VM-0-14-centos bin]# cd ..
+  ```
+
+  ![B272](../images/B272.png)
+
+  ```bash
+  [root@VM-0-14-centos mysql]# cp -a ./support-files/mysql.server /etc/init.d/mysql
+  ```
+
+  ![B274](../images/B274.png)
+
+11. 授权以及添加服务
+
+  ```bash
+  [root@VM-0-14-centos mysql]# chmod +x /etc/init.d/mysql
+  [root@VM-0-14-centos mysql]# chkconfig --add mysql
+  ```
+
+  ![B275](../images/B275.png)
+
+12. 启动mysql
+
+  ```bash
+  [root@VM-0-14-centos mysql]# service mysql start
+  ```
+
+  ![B276](../images/B276.png)
+
+13. 将mysql添加到命令服务
+
+  ```bash
+  [root@VM-0-14-centos mysql]# ln -s /usr/local/mysql/bin/mysql /usr/bin
+  ```
+
+  ![B277](../images/B277.png)
+  
+14. 登录mysql
+
+  ```bash
+  [root@VM-0-14-centos mysql]# mysql -uroot -p
+  ```
+
+  > 如果出现 mysql: error while loading shared libraries: libtinfo.so.5: cannot open shared object file: No such file or directory
+
+  ```bash
+  cd /usr/local/mysql/bin
+  ldd mysql
+  ```
+
+  ![B278](../images/B278.png)
+
+  ```bash
+  sudo ln -s /usr/lib64/libtinfo.so.6.1 /usr/lib64/libtinfo.so.5
+  ```
+
+15. 输入刚刚初始化时生成的密码
+
+  ![B279](../images/B279.png)
+
+16. 更改root用户密码, 注意语句后的; 执行语句忘记写了 可以补个空的;回车也可以将语句执行
+
+  ```bash
+  mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密码';  
+  ```
+
+  ![B280](../images/B280.png)
+
+  ```bash
+  mysql> flush privileges;
+  ```
+  
+  ![B281](../images/B281.png)
+
+17. 更改root连接权限
+
+  ```bash
+  mysql> use mysql;
+  mysql> update user set host='%' where user = 'root';
+  mysql> flush privileges;
+  ```
+
+  ![B282](../images/B282.png)
+
+18. exit; 退出mysql
+
+  ![B283](../images/B283.png)
+
+19. 打开防火墙3306端口
+
+  ```bash
+  root@192.168.1.211:/usr/local/mysql# firewall-cmd --zone=public --add-port=3306/tcp --p
+  ermanent
+  success
+  ```
+
+20. 让配置立即生效
+
+  ```bash
+  root@192.168.1.211:/usr/local/mysql# firewall-cmd --reload
+  success
+  ```
+
+  > 至此，MySQL 8.0.31 版本的数据库安装已经完成，现在就可以通过连接工具登录root账户进行远程连接了。系统为CentOS Linux release 7.8.2003 (Core)
+
 ## 2.2 Kali
 
 ### 2.2.1 设置静态 IP
